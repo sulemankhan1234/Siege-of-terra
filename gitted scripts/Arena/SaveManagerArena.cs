@@ -11,6 +11,7 @@ public class SaveManagerArena : MonoBehaviour
     public UiScript UiScript;
     public SaveData SaveData; // this is where the save data is stored when loaded and updated at save..!!
     public string[] allSavedTemplateNames;
+    public UIScriptArena UIScriptArena;
     //public string[] 
 
     private void Start()
@@ -40,8 +41,11 @@ public class SaveManagerArena : MonoBehaviour
                     tempnum--;
                 }
                 allSavedTemplateNames[i] = SaveData.shipDataToStore[i].templateName;
+               // Debug.Log(SaveData.shipDataToStore[i].templateName);
             }
         }
+
+        UIScriptArena.PanelButtonSpawner();
     }
 
 
