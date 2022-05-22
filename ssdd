@@ -1,0 +1,168 @@
+[33mcommit 78ab07b67bf7d8c15e9e62d2ad87673c3422f681[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Suleman <SulemanDaudKhan@gmail.com>
+Date:   Mon Apr 18 20:40:00 2022 +0500
+
+    adding serialization manager to git repo
+
+[1mdiff --git a/gitted scripts.meta b/gitted scripts.meta[m
+[1mnew file mode 100644[m
+[1mindex 0000000..46e82c8[m
+[1m--- /dev/null[m
+[1m+++ b/gitted scripts.meta[m	
+[36m@@ -0,0 +1,8 @@[m
+[32m+[m[32mfileFormatVersion: 2[m
+[32m+[m[32mguid: a9405a58b3043964396f8b3a4f21dc21[m
+[32m+[m[32mfolderAsset: yes[m
+[32m+[m[32mDefaultImporter:[m
+[32m+[m[32m  externalObjects: {}[m
+[32m+[m[32m  userData:[m[41m [m
+[32m+[m[32m  assetBundleName:[m[41m [m
+[32m+[m[32m  assetBundleVariant:[m[41m [m
+[1mdiff --git a/gitted scripts/Serialization.meta b/gitted scripts/Serialization.meta[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bbd56a5[m
+[1m--- /dev/null[m
+[1m+++ b/gitted scripts/Serialization.meta[m	
+[36m@@ -0,0 +1,8 @@[m
+[32m+[m[32mfileFormatVersion: 2[m
+[32m+[m[32mguid: ba77dc9b33f8ccf4495b36337c461727[m
+[32m+[m[32mfolderAsset: yes[m
+[32m+[m[32mDefaultImporter:[m
+[32m+[m[32m  externalObjects: {}[m
+[32m+[m[32m  userData:[m[41m [m
+[32m+[m[32m  assetBundleName:[m[41m [m
+[32m+[m[32m  assetBundleVariant:[m[41m [m
+[1mdiff --git a/gitted scripts/Serialization/SerializationManager.cs b/gitted scripts/Serialization/SerializationManager.cs[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a1697a1[m
+[1m--- /dev/null[m
+[1m+++ b/gitted scripts/Serialization/SerializationManager.cs[m	
+[36m@@ -0,0 +1,84 @@[m
+[32m+[m[32musing System.Collections;[m
+[32m+[m[32musing System.Collections.Generic;[m
+[32m+[m[32musing System.Runtime.Serialization.Formatters.Binary;[m
+[32m+[m[32musing System.IO;[m
+[32m+[m[32musing UnityEngine;[m
+[32m+[m
+[32m+[m[32mpublic class SerializationManager[m[41m [m
+[32m+[m[32m{[m
+[32m+[m[32m    public static bool Save(string saveName, object saveData)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        BinaryFormatter formatter = GetBinaryFormatter();[m
+[32m+[m[32m        if(!Directory.Exists(Application.persistentDataPath + "/SaveGame/"))[m
+[32m+[m[32m        {[m
+[32m+[m[32m            Directory.CreateDirectory(Application.persistentDataPath + "/SaveGame/");[m
+[32m+[m
+[32m+[m[32m        }[m
+[32m+[m[32m        string path = Application.persistentDataPath + "/SaveGame/" + saveName + ".save";[m
+[32m+[m[32m        //string path = Application.persistentDataPath + "/SaveGame.save";[m
+[32m+[m
+[32m+[m[32m        FileStream file = File.Create(path);[m
+[32m+[m[32m        formatter.Serialize(file, saveData);[m
+[32m+[m
+[32m+[m[32m        file.Close();[m
+[32m+[m[32m        return true;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public static bool Save2(string ProfileName, object saveData)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        BinaryFormatter formatter = GetBinaryFormatter();[m
+[32m+[m[32m        if (!Directory.Exists(Application.persistentDataPath + "/SaveGame/"))[m
+[32m+[m[32m        {[m
+[32m+[m[32m            Directory.CreateDirectory(Application.persistentDataPath + "/SaveGame/");[m
+[32m+[m
+[32m+[m[32m        }[m
+[32m+[m[32m        string path = Application.persistentDataPath + "/SaveGame/" + ProfileName + ".save";[m
+[32m+[m[32m        //string path = Application.persistentDataPath + "/SaveGame.save";[m
+[32m+[m[41m        [m
+[32m+[m[32m        if(File.Exists(path))[m
+[32m+[m[32m        {[m
+[32m+[m[41m            [m
+[32m+[m[32m            File.Delete(path);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        FileStream file = File.Create(path);[m
+[32m+[m[32m        formatter.Serialize(file, saveData);[m
+[32m+[m
+[32m+[m[32m        file.Close();[m
+[32m+[m[32m        return true;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public static object Load(string path)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        if(!File.Exists(path))[m
+[32m+[m[32m        {[m
+[32m+[m[32m            Debug.Log("could not find file");[m
+[32m+[m[32m            return null;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        BinaryFormatter formatter = GetBinaryFormatter();[m
+[32m+[m[32m        FileStream file = File.Open(path, FileMode.Open);[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        try[m
+[32m+[m[32m        {[m
+[32m+[m[32m            object save = formatter.Deserialize(file);[m
+[32m+[m[32m            file.Close();[m
+[32m+[m[32m            return save;[m
+[32m+[m[32m        }[m
+[32m+[m[32m        catch[m
+[32m+[m[32m        {[m
+[32m+[m[32m            Debug.LogErrorFormat("failed to load at {0} try again later or something", path);[m
+[32m+[m[32m            file.Close();[m
+[32m+[m[32m            return null;[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public static BinaryFormatter GetBinaryFormatter()[m
+[32m+[m[32m    {[m
+[32m+[m[32m        BinaryFormatter formatter = new BinaryFormatter();[m
+[32m+[m
+[32m+[m[32m        return formatter;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/gitted scripts/Serialization/SerializationManager.cs.meta b/gitted scripts/Serialization/SerializationManager.cs.meta[m
+[1mnew file mode 100644[m
+[1mindex 0000000..cdc37ce[m
+[1m--- /dev/null[m
+[1m+++ b/gitted scripts/Serialization/SerializationManager.cs.meta[m	
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32mfileFormatVersion: 2[m
+[32m+[m[32mguid: 3d43928cc6329474e96805c2215f2b8a[m
+[32m+[m[32mMonoImporter:[m
+[32m+[m[32m  externalObjects: {}[m
+[32m+[m[32m  serializedVersion: 2[m
+[32m+[m[32m  defaultReferences: [][m
+[32m+[m[32m  executionOrder: 0[m
+[32m+[m[32m  icon: {instanceID: 0}[m
+[32m+[m[32m  userData:[m[41m [m
+[32m+[m[32m  assetBundleName:[m[41m [m
+[32m+[m[32m  assetBundleVariant:[m[41m [m
+
+[33mcommit 01ba0e76a5d73a8ec97fffd5287071bf65e4c1e0[m
+Author: Suleman <SulemanDaudKhan@gmail.com>
+Date:   Mon Apr 18 20:12:44 2022 +0500
+
+    first commit
+
+[1mdiff --git a/Scripts.meta b/Scripts.meta[m
+[1mnew file mode 100644[m
+[1mindex 0000000..788079a[m
+[1m--- /dev/null[m
+[1m+++ b/Scripts.meta[m
+[36m@@ -0,0 +1,8 @@[m
+[32m+[m[32mfileFormatVersion: 2[m
+[32m+[m[32mguid: ee500f48bf98f164eadda8417d651258[m
+[32m+[m[32mfolderAsset: yes[m
+[32m+[m[32mDefaultImporter:[m
+[32m+[m[32m  externalObjects: {}[m
+[32m+[m[32m  userData:[m[41m [m
+[32m+[m[32m  assetBundleName:[m[41m [m
+[32m+[m[32m  assetBundleVariant:[m[41m [m
+[1mdiff --git a/gitted scripts/txt.txt b/gitted scripts/txt.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/newscripts2/test txt.txt b/newscripts2/test txt.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m

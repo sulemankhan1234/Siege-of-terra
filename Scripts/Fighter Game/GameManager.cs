@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> shipList;
     public List<TweenScript> tweenList;
     public List<FighterMainScript> fighterMainScriptsList;
+
+    
    // public bool runOnceTween;
     // Start is called before the first frame update
     void Start()

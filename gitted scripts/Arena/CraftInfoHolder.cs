@@ -5,7 +5,14 @@ using UnityEngine;
 public class CraftInfoHolder : MonoBehaviour
 {
     public float craftHealth = 1000;
+    public GameManager GameManager;
     // in the future we hold all info on each component.
+
+    private void Start()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         
@@ -13,7 +20,7 @@ public class CraftInfoHolder : MonoBehaviour
         Debug.Log("enter collision");
         if(other.gameObject.tag =="bullet")
         {
-
+            Debug.Log("working");
             craftHealth = craftHealth - 10;
 
 
@@ -21,6 +28,7 @@ public class CraftInfoHolder : MonoBehaviour
 
             if (craftHealth < 0)
             {
+
                 GameObject.Destroy(this.gameObject);
             }
         }

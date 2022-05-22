@@ -520,12 +520,17 @@ public class TweenScript : MonoBehaviour
         // turn and shoot
 
         // Aggressive
+        // make ui options selection menu.
+        // stop at 10 distance
+        //
 
-        AIMode = 1;
+        AIMode = 1;                      
 
         if (AIMode == 1)
         {
-
+            
         }
+
+
     }
 }

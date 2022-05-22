@@ -33,6 +33,12 @@ public class Notes2 : MonoBehaviour
     //          - make AI
     //          - make torpeedo Mover
     //          - make 
+    //          - balance of power
+    //          - ai preference selector button
+    //          - formation preference button
+    //          
+    //
+
 
 
     // change color at selection of team.

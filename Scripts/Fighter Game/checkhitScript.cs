@@ -18,7 +18,7 @@ public class checkhitScript : MonoBehaviour
         if (other.GetComponent<BulletScript>() == true )
         {
            // Debug.Log("Hit hit");
-            impactEffectScript.ImpactBullets(transform);
+            //impactEffectScript.ImpactBullets(transform);
             //fighterInfo.damagelightcontrol();
 
 

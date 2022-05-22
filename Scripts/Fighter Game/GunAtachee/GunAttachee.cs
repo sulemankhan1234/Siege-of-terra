@@ -128,7 +128,7 @@ public class GunAttachee : MonoBehaviour
                 rotationtemp.y = rotationtemp.y + rnd;
                 GameObject tempbullet;
                 tempbullet = Instantiate(myProjectile, transform.position, rotationtemp);
-                tempbullet.GetComponent<BulletScript>().myTeamTag = myShip.tag;
+                tempbullet.GetComponent<BulletScript>().enemyTeamTag = myTarget.tag;
             }
 
             if (myRange == 2 && angleToTarget < 0 && timerBullet > 0) // +ve is starboard -ve is portside
@@ -138,7 +138,7 @@ public class GunAttachee : MonoBehaviour
                 var rotationtemp = transform.rotation;
                 rotationtemp.y = rotationtemp.y + rnd;
                 tempbullet = Instantiate(myProjectile, transform.position, rotationtemp);
-                tempbullet.GetComponent<BulletScript>().myTeamTag = myShip.tag;
+                tempbullet.GetComponent<BulletScript>().enemyTeamTag = myTarget.tag;
 
             }
 
@@ -151,7 +151,7 @@ public class GunAttachee : MonoBehaviour
                 rotationtemp.y = rotationtemp.y + rnd;
                 GameObject tempbullet;
                 tempbullet = Instantiate(myProjectile, transform.position, rotationtemp);
-                tempbullet.GetComponent<BulletScript>().myTeamTag = myShip.tag;
+                tempbullet.GetComponent<BulletScript>().enemyTeamTag = myTarget.tag;
             }
 
             timerBullet = 0;
@@ -262,8 +262,8 @@ public class GunAttachee : MonoBehaviour
 
         float t1 = (b + Mathf.Sqrt(b * b - 4 * a * c)) / acc;
         float t2 = (b - Mathf.Sqrt(b * b - 4 * a * c)) / acc;
-        Debug.Log("the value of t1 = " + t1);
-        Debug.Log("the value of t2 = " + t2); // correect 1
+      //  Debug.Log("the value of t1 = " + t1);
+      //  Debug.Log("the value of t2 = " + t2); // correect 1
 
        // Vector3 distancedTargetMoved = targetVelocity * t1 + 0.5f * acc * myTarget.transform.forward * t1 * t1;
         Vector3 distancedTargetMoved2 = targetVelocity * t2 + 0.5f * acc * myTarget.transform.forward * t2 * t2;

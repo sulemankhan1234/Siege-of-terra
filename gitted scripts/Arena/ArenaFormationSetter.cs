@@ -11,9 +11,11 @@ public class ArenaFormationSetter : MonoBehaviour
     // arrange in 2d arrays
     // rows and columns
     // 
-    
+    public List<Formations> allFormations;
     public GameManager GameManager;
     public Selected Selected;
+    public GameObject target;
+
     public Vector3 rightClickPosition;
     public Vector3 startOfRightClick;
     public Vector3 endOfRightClick;
@@ -35,7 +37,7 @@ public class ArenaFormationSetter : MonoBehaviour
 
     public void FormationSetter()
     {
-        Debug.Log("runing");
+       // Debug.Log("runing");
         int tempSelectedCrafts = Selected.selectedGameObjectsArray.Length;
         bool even;
 
@@ -152,6 +154,10 @@ public class ArenaFormationSetter : MonoBehaviour
             return;
         }
 
+        //if clicked on enemy
+    
+
+
         //Start point 
         if (Input.GetMouseButtonDown(1))
         {
@@ -192,4 +198,32 @@ public class ArenaFormationSetter : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         gameobject.GetComponent<LineRenderer>().enabled = false;
     }
+
+    // add formation id to all crafts
+    // make formations perminent, ie if you click one you clikc the formation, double click selects the craft.
+    // 
+
+    // make formations and make them remember formations.
+    // remove crafts from formations
+
+    // right click target 
+    // selected targets find average position
+    // distance to target => target - average
+    // calculate magnitude of distance - desired range
+    // multiply with distance to target direction
+    // that the position as the formation destination
+    // 
+    // 
+
+    public void FormationMoveToIntercept()
+    {
+        
+    }
+
+}
+
+public class Formations
+{
+    public int formationID;
+    public GameObject[] craftsInFormation;
 }

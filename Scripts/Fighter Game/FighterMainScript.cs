@@ -12,6 +12,9 @@ public class FighterMainScript : MonoBehaviour
     public string myTag;
     public bool stopMovement;
     public bool stopShooting;
+    public float craftHealth = 100;
+
+
     void Start()
     {
         TweenScript = GetComponent<TweenScript>();
@@ -23,18 +26,40 @@ public class FighterMainScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void MainFighterUpdate()
+   public void MainFighterUpdate() //  thios is in the game manager because somehow the bullets fire trigger overlap
     {
         if (GameManager.isPaused == true)
         {
             return;
         }
-       // Debug.Log("running");
+        // Debug.Log("running");
         if (stopMovement == false)
         {
             TweenScript.MovementMasterController();
         }
-      //  RCSScript.RCSMasterControler();
+        //  RCSScript.RCSMasterControler(); 
+    }
+ 
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+
+        Debug.Log("enter collision");
+        if (other.gameObject.tag == "bullet" && other.gameObject.GetComponent<BulletScript>().enemyTeamTag == gameObject.tag)
+        {
+            Debug.Log("working");
+            craftHealth = craftHealth - 10;
+
+
+            GameObject.Destroy(other.gameObject);
+
+            if (craftHealth < 0)
+            {
+
+                GameObject.Destroy(this.gameObject);
+            }
+        }
 
     }
 }
