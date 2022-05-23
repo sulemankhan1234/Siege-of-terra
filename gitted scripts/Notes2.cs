@@ -130,4 +130,24 @@ public class Notes2 : MonoBehaviour
     // team indicator colors (later to do)
     // 
 
+
+    // task for today..
+    /// formation making
+    // give current formation maker and save it in the  <list> of class formation
+    // make it so that whenever it is selected again keep the ships in same formation
+    // when you select an object remove it from the formation
+    // if selecting a bunch of objects remove them from old formations add them to new one.
+    // if you select an object and then move the formation they will not move as a group and not rearrange
+    // 
+
+    /// 23 may 2022
+    // pass all orders to craft from formation setter
+    // 1 2 3 or selected craft will recieve orders from formation setter
+    // each order will create formation.
+    /// create list of class formations
+    /// add all selected moved crafts to this list
+    /// if one or some are selected all are selected to undo this add small button to middle of formation to delete formation.
+    /// have this middle of formation average of the positions of the objects
+    /// 
+
 }

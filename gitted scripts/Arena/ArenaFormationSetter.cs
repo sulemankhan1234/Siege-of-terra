@@ -199,9 +199,28 @@ public class ArenaFormationSetter : MonoBehaviour
         gameobject.GetComponent<LineRenderer>().enabled = false;
     }
 
+
+
+
     // add formation id to all crafts
     // make formations perminent, ie if you click one you clikc the formation, double click selects the craft.
     // 
+    // 
+    // control groups can be made with this
+    // 
+    // make formations and make them remember formations.
+    // remove crafts from formations
+
+
+    // 
+
+
+    /// NOTES FOR FORMATION TO BE DONE LATER
+    // notes for structure of formation
+    // give all move orders form formation script
+    // when you move a single ship pass the target or destination to said ship.
+    // when moving multiplke ships, make formation then pass order.!
+    // save formation and positions of ships
     // make formation class
     // each selected agroup go to formation buffer
     // each selected then moved group goes to formation list
@@ -210,24 +229,33 @@ public class ArenaFormationSetter : MonoBehaviour
     // make a way to select a craft and remove from formation
     // -- i think just giving a move command should make new formation and remove craft from old formation
     // give formations perminent positions
-    // 
-    // control groups can be made with this
-    // 
-    // make formations and make them remember formations.
-    // remove crafts from formations
+    // give biiger ships bigger distance..!! or just set formation distance bigger for formations with bigger ships
+    // custom formations will just have array with fixed positions.
+    // 1d vector 3 array save all positions and will fill with such order.
+    // preference to ships in slots
+    // will have to make a formation class with
+    // perminent foramtion id. one that is saved manually outside of arena feature to be added later
+    // tempformation id, formation made automatically, is temprary will be deleted 
+    // vector 3 array of crafts in formation, 
+    // vector 3 being position of craft in array
+    // make formation info class
+    // array of formation info class will contain, all info off each position of formation
 
-    // right click target 
+
+    // make it so formations can face a direction and not only objects face the direction
+    // 
+
+    // when with group selected right click target 
     // selected targets find average position
     // distance to target => target - average
     // calculate magnitude of distance - desired range
     // multiply with distance to target direction
     // that the position as the formation destination
     // 
-    // 
 
 
     // when right clicked on an enemy object 
-    //just move towards the 
+    //just move towards the enemy and start shooting when in AI mode range
 
     public void FormationMoveToIntercept()
     {
@@ -239,5 +267,16 @@ public class ArenaFormationSetter : MonoBehaviour
 public class Formations
 {
     public int formationID;
-    public GameObject[] craftsInFormation;
+    public int tempFormationID;
+    public List<FormationNodeInfoClass> formationNodeInfoList;
+}
+
+public class FormationNodeInfoClass
+{
+    public int craftID;
+    public Vector3 positionInWorldCoordinate;
+    public int preferedCraftType;
+
+    // will need to give each craft an ID
+    // 
 }

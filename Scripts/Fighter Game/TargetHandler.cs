@@ -234,9 +234,10 @@ public class TargetHandler : MonoBehaviour
 
             //    Instantiate(bullet1, gunL3.transform.position, rotationtemp2);
 
-
-            //}
-
+            //}/// fsdf
+            /// asdas 
+            /// dfgdfgdf
+            /// 
 
             if (R1 == true)
             {

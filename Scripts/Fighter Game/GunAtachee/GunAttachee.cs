@@ -223,7 +223,7 @@ public class GunAttachee : MonoBehaviour
             {
                 myTarget = i;
             }
-
+            
             if (tempvect3.magnitude > temp2.magnitude && myRange ==1 && tempAngle >0)
             {
                 myTarget = i;
@@ -274,7 +274,7 @@ public class GunAttachee : MonoBehaviour
         leanedTarget = targetPosition;
     }
 
-    public void RayGunHandler()
+    public void RayGunHandler()///
     {
         // line renderer to the gun prefab
         // give add reference
