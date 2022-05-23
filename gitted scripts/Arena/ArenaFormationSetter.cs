@@ -202,7 +202,17 @@ public class ArenaFormationSetter : MonoBehaviour
     // add formation id to all crafts
     // make formations perminent, ie if you click one you clikc the formation, double click selects the craft.
     // 
-
+    // make formation class
+    // each selected agroup go to formation buffer
+    // each selected then moved group goes to formation list
+    // move craft as a formation.
+    // selecting one will select entire formation
+    // make a way to select a craft and remove from formation
+    // -- i think just giving a move command should make new formation and remove craft from old formation
+    // give formations perminent positions
+    // 
+    // control groups can be made with this
+    // 
     // make formations and make them remember formations.
     // remove crafts from formations
 
@@ -214,6 +224,10 @@ public class ArenaFormationSetter : MonoBehaviour
     // that the position as the formation destination
     // 
     // 
+
+
+    // when right clicked on an enemy object 
+    //just move towards the 
 
     public void FormationMoveToIntercept()
     {

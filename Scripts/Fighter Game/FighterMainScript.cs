@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FighterMainScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class FighterMainScript : MonoBehaviour
     public bool stopMovement;
     public bool stopShooting;
     public float craftHealth = 100;
+    public Sprite teamIndicatorSprite;
 
 
     void Start()
@@ -22,6 +24,8 @@ public class FighterMainScript : MonoBehaviour
 
         GameObject gameObject = GameObject.Find("gameManager");
         GameManager = gameObject.GetComponent<GameManager>();
+
+        TeamIndicator();
 
     }
 
@@ -56,10 +60,24 @@ public class FighterMainScript : MonoBehaviour
 
             if (craftHealth < 0)
             {
-
+                GameManager.fighterMainScriptsList.Remove(gameObject.GetComponent<FighterMainScript>());
                 GameObject.Destroy(this.gameObject);
             }
         }
 
+    }
+
+    public void TeamIndicator()
+    {
+
+        if (gameObject.tag == "team2")
+        {
+            transform.Find("Indicator").GetComponent<SpriteRenderer>().color = new Color(0,0.5f,1);
+        }
+
+        if (gameObject.tag == "Team1")
+        {
+            transform.Find("Indicator").GetComponent<SpriteRenderer>().color = Color.red;
+        }
     }
 }

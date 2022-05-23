@@ -21,6 +21,7 @@ public class GunAttachee : MonoBehaviour
 
     public GameObject indicator;
     public GameObject indicatorprefab;
+    public Vector3 leanedTarget;
     
 
     public float angleToTarget;
@@ -108,7 +109,7 @@ public class GunAttachee : MonoBehaviour
 
         //Debug.Log(mousePosClick0);
         // making guns look at mouse click point
-        transform.LookAt(myTarget.transform.transform.position);
+        transform.LookAt(leanedTarget);
         
         // gunL2.transform.LookAt(target1.transform.transform.position);
         //   gunL3.transform.LookAt(target1.transform.transform.position);
@@ -270,6 +271,7 @@ public class GunAttachee : MonoBehaviour
         Vector3 distanceFinal = initialDistance + distancedTargetMoved2;
         Vector3 targetPosition = distanceFinal + myShip.transform.position;
         indicator.transform.position = targetPosition;
+        leanedTarget = targetPosition;
     }
 
     public void RayGunHandler()

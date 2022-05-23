@@ -10,6 +10,8 @@ public class Notes2 : MonoBehaviour
     // bug fix selection making extra non removeable boxes
     // make them find myship at creation
     // bug fixes Make it so guns shoot at other tags then their own.!
+    // change color at selection of team.
+    //          -  fix when craaft are destroyed they create error.!
 
     ////////////////////////////////////
     /////////////////////////////////////
@@ -36,12 +38,14 @@ public class Notes2 : MonoBehaviour
     //          - balance of power
     //          - ai preference selector button
     //          - formation preference button
-    //          
+    //          - fix the dame door
+    //          - make algorithem that converts shiptemplate info to grid in the shipmaker shit
+    //          - make AI
     //
 
 
 
-    // change color at selection of team.
+
     // Task Today
     // dev mode where you can control all ships withright click or manual movement
     // crate AI. that follows and does the planned things

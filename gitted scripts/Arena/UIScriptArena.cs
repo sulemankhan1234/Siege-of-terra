@@ -24,6 +24,7 @@ public class UIScriptArena : MonoBehaviour
 
     public Vector3[,] posForComponents;
     public string spawningTeam;
+
    // public GameObject 
 
 
