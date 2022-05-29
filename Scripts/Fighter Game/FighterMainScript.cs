@@ -45,27 +45,7 @@ public class FighterMainScript : MonoBehaviour
     }
  
 
-    private void OnTriggerEnter(Collider other)
-    {
 
-
-        Debug.Log("enter collision");
-        if (other.gameObject.tag == "bullet" && other.gameObject.GetComponent<BulletScript>().enemyTeamTag == gameObject.tag)
-        {
-            Debug.Log("working");
-            craftHealth = craftHealth - 10;
-
-
-            GameObject.Destroy(other.gameObject);
-
-            if (craftHealth < 0)
-            {
-                GameManager.fighterMainScriptsList.Remove(gameObject.GetComponent<FighterMainScript>());
-                GameObject.Destroy(this.gameObject);
-            }
-        }
-
-    }
 
     public void TeamIndicator()
     {
@@ -79,5 +59,23 @@ public class FighterMainScript : MonoBehaviour
         {
             transform.Find("Indicator").GetComponent<SpriteRenderer>().color = Color.red;
         }
+    }
+
+    public void HitHitHit(GameObject Bullet)
+    {
+        //Debug.Log("Near the target");
+
+
+        craftHealth = craftHealth - Bullet.GetComponent<BulletScript>().bulletDamage;
+
+
+        GameObject.Destroy(Bullet.gameObject);
+
+        if (craftHealth < 0)
+        {
+            GameManager.fighterMainScriptsList.Remove(gameObject.GetComponent<FighterMainScript>());
+            GameObject.Destroy(this.gameObject);
+        }
+
     }
 }

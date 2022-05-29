@@ -214,6 +214,9 @@ public class UIScriptArena : MonoBehaviour
                     tempgum.myTag = "team2";
                     tempgum.myShip = createdShip;
                     tempgum.myProjectile = ComponentData.allComponenets2[componentid].bulletPrefab;
+                    tempgum.bulletDamage = ComponentData.allComponenets2[componentid].bulletDamage;
+                    tempgum.bulletSpeed = ComponentData.allComponenets2[componentid].bulletSpeed;
+                    tempgum.inaccuracy = ComponentData.allComponenets2[componentid].inaccuracy;
                     //   tempgum.ToRunManuallyAfterStart();
 
 

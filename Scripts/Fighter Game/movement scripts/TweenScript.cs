@@ -31,7 +31,7 @@ public class TweenScript : MonoBehaviour
     public float velocityMagnitudeNeeded;
     public float engineThrust;
     public float maxVelocity;
-    public float rotationSpeed =90;
+    public float rotationSpeed =90f;
     public Vector3 bleedVelocity;
     public Vector3 myVelocity;
     public Vector3 projectedVector3;
@@ -66,10 +66,11 @@ public class TweenScript : MonoBehaviour
 
 
     public void MovementMasterController()
-    { 
+    {
+        FindDistance();
         FlightModeDecider();
         DistanceReqToStop();
-        FindDistance();
+   
         TargetVelocityCalculator();
         BleedVelocityFinder();
         CalculateBrakingVelocity();
@@ -125,6 +126,10 @@ public class TweenScript : MonoBehaviour
     public void RightClickDestination()
     {
         destination = rightClickTargetVector3;
+        if (distanceToDestination.magnitude > 0.5f)
+        {
+            isStopped = false;
+        }
     }
 
     public void TargetSetWithRightClick()
@@ -224,7 +229,7 @@ public class TweenScript : MonoBehaviour
     public void TargetVelocityCalculator()
     {
         Vector3 identitytemp = Vector3.Normalize(distanceToDestination);
-        targetVelocity = identitytemp * brakingVelocity;
+        targetVelocity = identitytemp * brakingVelocity*0.95f; /// jugar here
     }
 
     public void BleedVelocityFinder()
@@ -248,19 +253,20 @@ public class TweenScript : MonoBehaviour
         //myVelocity.x = myVelocity.x + tempora.x * Time.deltaTime * engineThrust / 3;
 
         myVelocity.z = myVelocity.z + tempora.z * Time.deltaTime*engineThrust ;
-        myVelocity.x = myVelocity.x + tempora.x * Time.deltaTime * engineThrust / 2;
+        myVelocity.x = myVelocity.x + tempora.x * Time.deltaTime * engineThrust/2;
         if (distanceToDestination.magnitude < 0.5f)
         {
             //Debug.Log("slow down");
 
             WhenIsStoppedTrue(); // is stopped done here..!!
+            isStopped = true;
             myVelocity = new Vector3(0, 0, 0);
         }
     }
 
     public void WhenIsStoppedTrue()
     {
-        isStopped = true;
+        
         RCSScript.TurnOffAllThrusters();
     }
 
@@ -460,9 +466,9 @@ public class TweenScript : MonoBehaviour
         {
             return;
         }
-        Debug.Log("running directiontoturn");
+      //  Debug.Log("running directiontoturn");
         float angle = Vector3.SignedAngle(transform.forward,directionToFaceAtStop, Vector3.up);
-        Debug.Log(angle);
+      //  Debug.Log(angle);
         if (angle > 0)
         {
             if (Mathf.Abs(angle) > 1f)

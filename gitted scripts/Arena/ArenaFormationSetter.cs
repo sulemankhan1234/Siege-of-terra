@@ -86,9 +86,9 @@ public class ArenaFormationSetter : MonoBehaviour
         float startPointX = (sizeRows-1)*distanceObj/2;
         float startPointZ = (sizeRows-1) * distanceObj / 2;
 
-        for(int x = 0; x < sizeRows; x++ ) //rows
+        for(int z = 0; z < sizeRows; z++ ) //rows
         {
-            for(int z = 0; z < sizeRows; z++) // columns
+            for(int x = 0; x < sizeRows; x++) // columns
             {
                
                 
@@ -96,25 +96,50 @@ public class ArenaFormationSetter : MonoBehaviour
                 {
                     break;
                 }
-
+                /// assign position in formation here.!
                 posOfCrafts[x, z] = tempvec3 + new Vector3 (distanceObj*x - startPointX, 0,distanceObj*z - startPointZ);
+
+                /// doing calculations to turn formation to align with desired direction here
+                // find angle between the 2 directions
+                // find r-rcos@ where r being the distance to the psoition of craft from click pos
+                // r-rcos@ is the change in distance x @ being the angle between the current pos in the fomration and the new pos
+                // find @ by 
+                // 
+                /// Using transform matrix
+                // x0 y0
+                // distance from start of click to pos of craft 
+                Vector3 distOfCraft = new Vector3(distanceObj * x - startPointX, 0, distanceObj * z - startPointZ);
+
+
+                float angleTemp1 = Vector3.SignedAngle(Vector3.forward, directionToFace, Vector3.up);
+                Vector3 newPos;
+                newPos.z = distOfCraft.z * Mathf.Cos(angleTemp1) + distOfCraft.x * Mathf.Sin(angleTemp1) + tempvec3.z;
+                newPos.x = distOfCraft.x * Mathf.Cos(angleTemp1) - distOfCraft.z * Mathf.Sin(angleTemp1) + tempvec3.x;
+                newPos.y = posOfCrafts[x, z].y;
+                Debug.Log(angleTemp1);
+
+                /// other settings 
                 TweenScript temptween = Selected.selectedGameObjectsArray[i].GetComponent<TweenScript>();
-                temptween.rightClickTargetVector3 = posOfCrafts[x, z];
+                temptween.rightClickTargetVector3 = newPos;
                 temptween.directionToFaceAtStop = directionToFace;
                 temptween.isStopped = false;
                 temptween.isDestinationManual = true;
                 //Debug.Log(Selected.selectedGameObjectsArray.Length);
 
+                /// line renderer
                 Selected.selectedGameObjectsArray[i].GetComponent<LineRenderer>().enabled = true;
                 Vector3[] tempVertices = new Vector3[2];
                 tempVertices[0] = Selected.selectedGameObjectsArray[i].transform.position;
-                tempVertices[1] = posOfCrafts[x, z];
+                //tempVertices[1] = posOfCrafts[x, z];
+                tempVertices[1] = newPos;
+
+
                 Selected.selectedGameObjectsArray[i].GetComponent<LineRenderer>().SetPositions(tempVertices);
                 
                 StartCoroutine(waiter(Selected.selectedGameObjectsArray[i]));
 
-                Debug.Log("value of X is: " + x + " value of Z is: " + z + ".");
-                Debug.Log(posOfCrafts[x, z]);
+              //  Debug.Log("value of X is: " + x + " value of Z is: " + z + ".");
+               // Debug.Log(posOfCrafts[x, z]);
 
                 //Debug.Log(i);
                 i++;

@@ -11,7 +11,7 @@ public class GunAttachee : MonoBehaviour
 
     public int myRange; // 1 for port, 2 for starboard, 3 for front.
     public string myTag;
-    public bool shoot;
+
     public GameObject myTarget;
     public GameObject myShip;
     public float timerBullet;
@@ -27,12 +27,16 @@ public class GunAttachee : MonoBehaviour
     public float angleToTarget;
     public float timeBetweenEachShot;
 
+    public float bulletSpeed;
+    public float bulletDamage;
     public int shotsPerSalvo;
     public float timeBetweenSalvos;
+
 
     public int salvoShotCounter;
     public bool salvoGo;
     public float salvoTimer;
+    public bool shoot;
 
     private void Start()
     {
@@ -43,7 +47,7 @@ public class GunAttachee : MonoBehaviour
 
 
         //timeBetweenEachShot = 0.04f;
-        inaccuracy = 0.025f;
+
         TargetHandler = GetComponentInParent<TargetHandler>();
         FighterMainScript = GetComponentInParent<FighterMainScript>();
         bulletShot = true;
@@ -130,6 +134,9 @@ public class GunAttachee : MonoBehaviour
                 GameObject tempbullet;
                 tempbullet = Instantiate(myProjectile, transform.position, rotationtemp);
                 tempbullet.GetComponent<BulletScript>().enemyTeamTag = myTarget.tag;
+                tempbullet.GetComponent<BulletScript>().bulletDamage = bulletDamage;
+                tempbullet.GetComponent<BulletScript>().bulletspeed = bulletSpeed;
+                tempbullet.GetComponent<BulletScript>().enemyShip = myTarget;
             }
 
             if (myRange == 2 && angleToTarget < 0 && timerBullet > 0) // +ve is starboard -ve is portside
@@ -140,19 +147,23 @@ public class GunAttachee : MonoBehaviour
                 rotationtemp.y = rotationtemp.y + rnd;
                 tempbullet = Instantiate(myProjectile, transform.position, rotationtemp);
                 tempbullet.GetComponent<BulletScript>().enemyTeamTag = myTarget.tag;
-
+                tempbullet.GetComponent<BulletScript>().bulletDamage = bulletDamage;
+                tempbullet.GetComponent<BulletScript>().bulletspeed = bulletSpeed;
+                tempbullet.GetComponent<BulletScript>().enemyShip = myTarget;
             }
 
 
             if (myRange == 3 && angleToTarget > -45 && angleToTarget < 45 && timerBullet > 0) // +ve is starboard -ve is portside
             {
-
                 float rnd = Random.Range(-inaccuracy, inaccuracy);
                 var rotationtemp = transform.rotation;
                 rotationtemp.y = rotationtemp.y + rnd;
                 GameObject tempbullet;
                 tempbullet = Instantiate(myProjectile, transform.position, rotationtemp);
                 tempbullet.GetComponent<BulletScript>().enemyTeamTag = myTarget.tag;
+                tempbullet.GetComponent<BulletScript>().bulletDamage = bulletDamage;
+                tempbullet.GetComponent<BulletScript>().bulletspeed = bulletSpeed;
+                tempbullet.GetComponent<BulletScript>().enemyShip = myTarget;
             }
 
             timerBullet = 0;
@@ -171,7 +182,7 @@ public class GunAttachee : MonoBehaviour
             bulletShot = true;
         }
 
-        if (salvoTimer > timeBetweenSalvos)
+        if (salvoTimer > timeBetweenSalvos + Random.Range(-0.3f * timeBetweenSalvos, 0.5f * timeBetweenSalvos))
         {
             salvoGo = true;
         }
@@ -267,7 +278,7 @@ public class GunAttachee : MonoBehaviour
       //  Debug.Log("the value of t2 = " + t2); // correect 1
 
        // Vector3 distancedTargetMoved = targetVelocity * t1 + 0.5f * acc * myTarget.transform.forward * t1 * t1;
-        Vector3 distancedTargetMoved2 = targetVelocity * t2 + 0.5f * acc * myTarget.transform.forward * t2 * t2;
+        Vector3 distancedTargetMoved2 = targetVelocity * t2 + 0.5f * 0 * myTarget.transform.forward * t2 * t2;
         Vector3 distanceFinal = initialDistance + distancedTargetMoved2;
         Vector3 targetPosition = distanceFinal + myShip.transform.position;
         indicator.transform.position = targetPosition;
@@ -279,9 +290,6 @@ public class GunAttachee : MonoBehaviour
         // line renderer to the gun prefab
         // give add reference
         // find target draw ray to the target.
-
-
-
     }
     
 

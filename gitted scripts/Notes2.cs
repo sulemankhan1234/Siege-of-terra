@@ -140,7 +140,8 @@ public class Notes2 : MonoBehaviour
     // if you select an object and then move the formation they will not move as a group and not rearrange
     // 
 
-    /// 23 may 2022
+    /// 23 may 2022 (incomplete)
+    ///  
     // pass all orders to craft from formation setter
     // 1 2 3 or selected craft will recieve orders from formation setter
     // each order will create formation.
@@ -149,5 +150,60 @@ public class Notes2 : MonoBehaviour
     /// if one or some are selected all are selected to undo this add small button to middle of formation to delete formation.
     /// have this middle of formation average of the positions of the objects
     /// 
+
+    /// 23 may 2022
+    // make formation face the direction you pointed with vector targeting.!
+    /// 
+
+    // give indication of where the crafts will be as you position them..!
+
+    /// For Later <Formations>
+    /// <Making_AI> AI
+    // ai will work from tweenScript
+    // all decisions will be made on the tweenScript
+    /// Overall AI Strategy.
+    /// <Defenece>
+    /// - Make a few fixed defensive formation
+    /// - fixed positions for flanks and what crafts to fit there.!
+
+    /// <Offensive>
+    /// - Make a few Offensive formations
+    /// - fixed positions for flanks and what crafts to fit there.!
+    /// - 
+    /// - 
+    /// choose target using tween script
+    /// Set Destination at a distance from enemy.
+    // 
+    /// <2>  
+    /// <3> 
+    /// 
+    
+
+    /// 28th may 2022
+    /// <Bullet_Script>
+    /// Make it hold Bullet Speed
+    /// make it hold Bullet Damage.
+    /// Use this Damage in ships
+    /// Give this to Compoenet ID of Weapons.!
+   // /// Add A Damage bonus Modifier List to FigherMainScript where all the Damage modifiers are added to bullet damage at spawn
+    /// 
+    /// 
+    ///
+    
+    ///<May_29_2022>
+    /// 1 - make a code for detecting hits on a object
+    /// 1a - if the bullet is some distacnce from target hit confirmed.!
+    /// <one> if the bullet is within the targets x meters. trigger a function in the fighter main script
+    /// <two> reduce health when triggered.!!
+    /// <three> Plan to add a few new guns.!
+    
+    /// <Ship_Maker>
+    /// <one> make a feature that creates a grid from template. all we need to do is add where there is a node and it will crate the grid..!
+    /// <Task1> Create a grid node template\
+    /// <Task2> Create a int 2d array for craft template where -1 means there is no node here. everyone else has a node.
+    /// <task3> display this node.!
+
+
+    
 
 }

@@ -8,9 +8,11 @@ public class BulletScript : MonoBehaviour
 	public Camera mainCamera;
 	public Vector3 mousePosClick0;
     public GameManager GameManager;
+    public GameObject enemyShip;
 	//public RaycastHit raycasthit;
     
 	public float bulletspeed;
+    public float bulletDamage;
     private float timer = 0;
     private float SpinRND;
 
@@ -19,6 +21,7 @@ public class BulletScript : MonoBehaviour
     public bool isSparkyOne = false;
     public string enemyTeamTag;
     public string myTeamTag;
+    public Vector3 tempDistance;
 
 
     public void Awake()
@@ -26,12 +29,14 @@ public class BulletScript : MonoBehaviour
         timer = 0;
         GameObject gameObject = GameObject.Find("gameManager");
         GameManager = gameObject.GetComponent<GameManager>();
-        bulletspeed = 70;
+
 
     }
 
     public void Update()
     {
+        ProximityDetector();
+
         if(GameManager.isPaused == true)
         {
             return;
@@ -65,6 +70,20 @@ public class BulletScript : MonoBehaviour
             }
         }
 
+    }
+
+    public void ProximityDetector()
+    {
+        if(enemyShip == null)
+        {
+            return;
+        }
+        Vector3 distance = enemyShip.transform.position - transform.position;
+        tempDistance = distance;
+        if (distance.magnitude <1.3f)
+        {
+            enemyShip.GetComponent<FighterMainScript>().HitHitHit(this.gameObject);
+        }
     }
 
 }
