@@ -193,8 +193,8 @@ public class Notes2 : MonoBehaviour
     ///<May_29_2022>
     /// 1 - make a code for detecting hits on a object
     /// 1a - if the bullet is some distacnce from target hit confirmed.!
-    /// <one> if the bullet is within the targets x meters. trigger a function in the fighter main script
-    /// <two> reduce health when triggered.!!
+    /// <one> if the bullet is within the targets x meters. trigger a function in the fighter main script <done>
+    /// <two> reduce health when triggered.!! <done>
     /// <three> Plan to add a few new guns.!
     
     /// <Ship_Maker>
@@ -202,8 +202,18 @@ public class Notes2 : MonoBehaviour
     /// <Task1> Create a grid node template\
     /// <Task2> Create a int 2d array for craft template where -1 means there is no node here. everyone else has a node.
     /// <task3> display this node.!
+    /// <Task0> Git mode on.!
 
-
+    /// <Ship_maker>
+    /// <May_31_2022>
+    /// 1. Finsih the new panel, move the button closer <done>
+    /// 2. Replace the buttons with pic button for crafts. <Later>
+    /// 3. Make a small sursury pic for each craft. <done>
+    /// 4. make code that creates grid. 
+    /// 4.1 when clicked display grid. 
+    /// 4.2 grid or template reference attached to button. <done>
+    /// 4.3 create referenced grid based on data. 
+    /// 4.4 distance betweeen each grid node and add bot left start.! 
     
 
 }
