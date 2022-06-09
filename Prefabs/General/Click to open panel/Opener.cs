@@ -5,11 +5,15 @@ using UnityEngine;
 public class Opener : MonoBehaviour
 {
     public GameObject panel;
+    public UiScript UiScript;
+
     public bool open;
 
 
     private void Start()
     {
+        GameObject temp4 = GameObject.Find("uiscript");
+        UiScript = temp4.GetComponent<UiScript>();
 
         Transform temptrans = transform.Find("Panel");
         panel = temptrans.gameObject;

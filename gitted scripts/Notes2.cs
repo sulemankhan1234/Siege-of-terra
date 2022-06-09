@@ -177,7 +177,7 @@ public class Notes2 : MonoBehaviour
     /// <2>  
     /// <3> 
     /// 
-    
+
 
     /// 28th may 2022
     /// <Bullet_Script>
@@ -185,18 +185,18 @@ public class Notes2 : MonoBehaviour
     /// make it hold Bullet Damage.
     /// Use this Damage in ships
     /// Give this to Compoenet ID of Weapons.!
-   // /// Add A Damage bonus Modifier List to FigherMainScript where all the Damage modifiers are added to bullet damage at spawn
+    // /// Add A Damage bonus Modifier List to FigherMainScript where all the Damage modifiers are added to bullet damage at spawn
     /// 
     /// 
     ///
-    
+
     ///<May_29_2022>
     /// 1 - make a code for detecting hits on a object
     /// 1a - if the bullet is some distacnce from target hit confirmed.!
     /// <one> if the bullet is within the targets x meters. trigger a function in the fighter main script <done>
     /// <two> reduce health when triggered.!! <done>
     /// <three> Plan to add a few new guns.!
-    
+
     /// <Ship_Maker>
     /// <one> make a feature that creates a grid from template. all we need to do is add where there is a node and it will crate the grid..!
     /// <Task1> Create a grid node template\
@@ -209,11 +209,48 @@ public class Notes2 : MonoBehaviour
     /// 1. Finsih the new panel, move the button closer <done>
     /// 2. Replace the buttons with pic button for crafts. <Later>
     /// 3. Make a small sursury pic for each craft. <done>
-    /// 4. make code that creates grid. 
-    /// 4.1 when clicked display grid. 
+    /// 4. make code that creates grid. <done>
+    /// 4.1 when clicked display grid.  <done>
     /// 4.2 grid or template reference attached to button. <done>
-    /// 4.3 create referenced grid based on data. 
-    /// 4.4 distance betweeen each grid node and add bot left start.! 
-    
+    /// 4.3 create referenced grid based on data.  <done>
+    /// 4.4 distance betweeen each grid node and add bot left start.!  <done>
+
+    /// <ship_Maker>
+    /// <june_5_2022>
+    /// Make it grid dissapear when other is selected. <done>
+    /// make sure one grid is loaded at start. <later>
+    /// put the created grid in a list <done>
+    /// make the spacing a little better <done>
+    /// make embedded script know its grid positon <done>
+    /// decide weather to make it bot left scewed or centered.! <Bot_Scewed_Coz_Im_lazy> 
+    /// give it Postion bot scewed <done>
+    /// find difference or what i have not added in the new nodes as compared to the old ones.! <Done>
+    ///    /// find a way to save all types of grids <done>
+    /// WP
+
+    /// <Ship_maker>
+    /// <june_6_2022>
+    /// make the spacing a little better <done> <Ideal_distance_is_61>
+    /// understand what needs to be Done to make Save Sytem intigrate with the new grid andmultiple platforms <done>
+    /// make a buffer that holds the current display ship temp ID <done>
+    /// find a way to fix where we dont have to do a double search in updateGrid <later>
+    /// Making it so that only the selected template saved designs are shown in the dropdown list. <next_session>
+    /// make it so that drop down list is disabled if there is no grid displayed.! <next_session>
+    /// 
+    /// if possible put all stuff from placement script to the UIScript.<Later>
+    /// 
+    /// <Ship_Maker>
+    /// <June_7_2022>
+    /// Making it so that only the selected template saved designs are shown in the dropdown list. <done>
+    /// Make it so that drop down list is disabled if there is no grid displayed.! <>
+    /// update the dropdown array when selecting the template button.! <done_Bug_takes_2_clicks_i_dont_know_why>
+    /// 
+    /// fix so that the color does not change after mosueExit. <done>
+    /// recheck how i pick the ship design when creating it. in the actual game.!
+    /// add the prefab as the ship and test if it works in the actual game.
+    /// add a few ships with new design.
+    /// create new weaposns.
+    /// 
+
 
 }

@@ -16,6 +16,7 @@ public class ButtonAttacheeShipYard : MonoBehaviour
 
     public void OnClickMe()
     {
+
         UiScript.GridInitiator(templateID);
     }
 }
