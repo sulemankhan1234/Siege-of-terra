@@ -17,6 +17,7 @@ public class GunAttachee : MonoBehaviour
     public float timerBullet;
     public bool bulletShot;
     public GameObject myProjectile;
+    public GameObject myShrapnal;
     public float inaccuracy;
 
     public GameObject indicator;
@@ -137,6 +138,13 @@ public class GunAttachee : MonoBehaviour
                 tempbullet.GetComponent<BulletScript>().bulletDamage = bulletDamage;
                 tempbullet.GetComponent<BulletScript>().bulletspeed = bulletSpeed;
                 tempbullet.GetComponent<BulletScript>().enemyShip = myTarget;
+                FighterMainScript tempScript = myTarget.GetComponent<FighterMainScript>();
+                float sizeZ = myTarget.GetComponent<BoxCollider>().bounds.extents.z;
+                float sizeX = myTarget.GetComponent<BoxCollider>().bounds.extents.x;
+                float sizeOfShip = Mathf.Sqrt(sizeX * sizeX + sizeZ * sizeZ);
+                tempbullet.GetComponent<BulletScript>().sizeOfShip = sizeOfShip;
+                tempbullet.GetComponent<BulletScript>().shipThickness = sizeX;
+                tempbullet.GetComponent<BulletScript>().shrepnalPrefab = myShrapnal;
             }
 
             if (myRange == 2 && angleToTarget < 0 && timerBullet > 0) // +ve is starboard -ve is portside
@@ -150,6 +158,14 @@ public class GunAttachee : MonoBehaviour
                 tempbullet.GetComponent<BulletScript>().bulletDamage = bulletDamage;
                 tempbullet.GetComponent<BulletScript>().bulletspeed = bulletSpeed;
                 tempbullet.GetComponent<BulletScript>().enemyShip = myTarget;
+                FighterMainScript tempScript = myTarget.GetComponent<FighterMainScript>();
+                float sizeZ = myTarget.GetComponent<BoxCollider>().bounds.extents.z;
+                float sizeX = myTarget.GetComponent<BoxCollider>().bounds.extents.x;
+                float sizeOfShip = Mathf.Sqrt(sizeX * sizeX + sizeZ * sizeZ);
+                tempbullet.GetComponent<BulletScript>().sizeOfShip = sizeOfShip;
+                tempbullet.GetComponent<BulletScript>().shipThickness = sizeX;
+                tempbullet.GetComponent<BulletScript>().shrepnalPrefab = myShrapnal;
+
             }
 
 
@@ -164,6 +180,13 @@ public class GunAttachee : MonoBehaviour
                 tempbullet.GetComponent<BulletScript>().bulletDamage = bulletDamage;
                 tempbullet.GetComponent<BulletScript>().bulletspeed = bulletSpeed;
                 tempbullet.GetComponent<BulletScript>().enemyShip = myTarget;
+                FighterMainScript tempScript = myTarget.GetComponent<FighterMainScript>();
+                float sizeZ = myTarget.GetComponent<BoxCollider>().bounds.extents.z;
+                float sizeX = myTarget.GetComponent<BoxCollider>().bounds.extents.x;
+                float sizeOfShip = Mathf.Sqrt(sizeX * sizeX + sizeZ * sizeZ);
+                tempbullet.GetComponent<BulletScript>().sizeOfShip = sizeOfShip;
+                tempbullet.GetComponent<BulletScript>().shipThickness = sizeX;
+                tempbullet.GetComponent<BulletScript>().shrepnalPrefab = myShrapnal;
             }
 
             timerBullet = 0;
@@ -285,7 +308,7 @@ public class GunAttachee : MonoBehaviour
         leanedTarget = targetPosition;
     }
 
-    public void RayGunHandler()///
+    public void RayGunHandler()
     {
         // line renderer to the gun prefab
         // give add reference

@@ -8,6 +8,9 @@ public class ButtonAttacheeShipYard : MonoBehaviour
     public string team;
     public UiScript UiScript;
     public int templateID;
+    public int componentID;
+    public string myButtonName;
+    
     private void Start()
     {
         GameObject gameObject = GameObject.Find("uiscript");
@@ -16,7 +19,35 @@ public class ButtonAttacheeShipYard : MonoBehaviour
 
     public void OnClickMe()
     {
+        if (myButtonName == "grid")
+        {
+            UiScript.GridInitiator(templateID);
+        }
 
-        UiScript.GridInitiator(templateID);
+        if (myButtonName == "Comp")
+        {
+            UiScript.selectedComponentID = componentID;
+            //UiScript.ComponentPanelHandler(myButtonName);
+            Debug.Log("Running");
+        }
+
+        if (myButtonName == "Weapons")
+        {
+            UiScript.ComponentPanelHandler(myButtonName);
+        }
+
+        if (myButtonName == "Armour")
+        {
+            UiScript.ComponentPanelHandler(myButtonName);
+        }
+
+        if (myButtonName == "NCC")
+        {
+            UiScript.ComponentPanelHandler(myButtonName);
+        }
+
     }
+
+
+
 }

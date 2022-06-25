@@ -246,11 +246,154 @@ public class Notes2 : MonoBehaviour
     /// update the dropdown array when selecting the template button.! <done_Bug_takes_2_clicks_i_dont_know_why>
     /// 
     /// fix so that the color does not change after mosueExit. <done>
-    /// recheck how i pick the ship design when creating it. in the actual game.!
-    /// add the prefab as the ship and test if it works in the actual game.
-    /// add a few ships with new design.
-    /// create new weaposns.
+
     /// 
+
+    /// <Ship_Maker>
+    /// <june_9_2022>
+    /// integrate new grid Code to ship creator.! <>
+    /// for now make ship temp 01 as the battle ship then find new free stuff
+    /// make battle ship prefab <done>
+    /// Carry templateID forward  <done>
+    /// give templateID to craft main script.<done>
+    /// give ship size to craft main script. <done>
+    /// make bullet hit script use ship size. <done>
+    /// Create a prefab list for all templates in ArenaUIScript. <Later>
+    /// Use templateID to select Prefab.  <Done>
+    /// use same code to instantiate all other things. <done>
+    /// create new weaposns. <later>
+    /// 
+
+    /// Make it so that the component list is auto updated from the componenet data script
+    /// make it so that the template are automatically updated using the shipData script
+    /// make atleast 10 merchant ships
+    /// and atleast 10 combat ships.
+    /// 
+
+    /// <Make_new_Weapons>
+    /// <flack_cannon>
+    /// exploding rounds need animation
+    /// proximity charge will blow near the ship primary target mines and torpedos
+    /// 
+    /// <a30mm_Cannon>
+    /// 
+    /// <Simple_MachineGun>
+    /// 
+    /// <RapidFire_cannon_like_on_the_AC130>
+    /// give this one exploding rounds as well.!
+    /// 
+    /// <june_10_2022>
+    /// <Explosive_Round>
+    /// my position = start postition.
+    /// final position list.
+    /// decide on depth.
+    /// decide on height.
+    /// find x y z position.
+    /// have 3 layers.
+    /// make prefab.
+    /// 
+
+    /// <june_11_2022>
+    /// collide with rotation matrix <done_it-collided_with_me>
+    /// make a button to change scene. <done>
+    /// make a reset button in both. <done>
+    /// find sparks animation
+    /// explosion animation
+    /// any thing that is good for now
+    /// 
+
+
+    /// <june_12_2022>
+    /// make torpeedo
+    /// did some modeling in blender.! <Done_2h>
+    /// 
+
+    /// <June_13_2022>
+    /// watched the boys had taken an alp went to sleep early
+
+    /// <June_14_2022>
+    /// make torpedo
+    /// Simple Model<done>
+    /// cylender with cone top, with some fines <done>
+    /// engine <done>
+    /// Give it Navigation script
+    /// 
+    /// make shiptemplate buttons
+    /// Button prefab is done <done>
+    /// give image to shipdata <Done>
+    /// give button name ID and image from shipdata  <done>
+    /// 
+    /// make compoenent Selector. <done>
+    /// sprite for compoenent data.  <done>
+    /// Make Sure only one panel is open at a time. <done>
+    /// make sure selected component is carried out like it should.! <dome> 
+    /// 
+    /// 
+    /// 
+    /// 
+    /// make ShipMaker Buttons better just remake it all <done>
+    /// buttons take info from component data. <done> 
+    /// images, and componenet name to make list.! <done>
+    /// 
+    /// make bullets take info from component data not from gunattachee script <later>
+    /// 
+    /// targeting system as leaner.  <>
+    /// heavy acc 
+    /// proximity explosion.
+    /// follow target. standard Interception
+
+
+    /// <june_18_2022>
+    /// check why the compoennt data is not spawing at the panel <done>
+    /// Make it so grid works with new code <done>
+    /// brain storm all kkinds of weapons <sort_of>
+    /// from simple conventional weapons to advanced military weapons.! <>
+    /// take comp ID from image to ui script <Done>
+    /// take comp id from ui script to grid then save, right click deselects componenet <later>
+    /// take image from compoenent id to grid image <done>
+    /// make sure loading runs as well <done>
+    /// 
+    /// fix selecting new comp loads the grid to default. <done>
+    /// 
+    ///  
+    /// <June_20_2022>
+    /// <brain_storming>
+    /// ac 130 40 mm 100 rpm
+    /// 40 mm flak exploding rounds
+    /// 40 mm ap
+    /// 
+    /// ac 130 105 mm hawister 10rpm
+    /// 105 mm ap
+    /// 105 mm flak
+    ///  
+    /// gatling gun 7.62 1800 rpm  CON ammo capacity
+    /// lasers 
+    /// torpeedos 
+    /// mines
+    /// 
+    /// rail gun Only ap
+    /// 
+    /// 
+    /// 
+    /// plasma energy weapons
+    /// 
+    /// anti matter weapons
+    /// 
+    /// neuclear weapons
+    /// 
+    /// 
+    /// <june_21_2022>
+    /// 
+
+    /// <june_25th_2022>
+    /// 
+    /// 1 make all classes static if you need them to be.!
+    /// 1a component data
+    /// 1b ship data
+    /// 1c 
+    /// 
+
+
 
 
 }

@@ -16,6 +16,12 @@ public class FighterMainScript : MonoBehaviour
     public float craftHealth = 100;
     public Sprite teamIndicatorSprite;
 
+    /// shipInfo
+    public int shipTemplateID;
+
+    /// bullet effects
+    public GameObject shrepnal;
+    
 
     void Start()
     {

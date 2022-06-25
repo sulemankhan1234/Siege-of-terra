@@ -7,9 +7,14 @@ public class ArenaButtonAttachee : MonoBehaviour
 {
     public SaveManagerArena SaveManagerArena;
     public Selected Selected;
+    public UIScriptArena UIScriptArena;
+    public int templateID;
     // Start is called before the first frame update
     void Start()
     {
+        GameObject temptemp = GameObject.Find("UIScriptArena");
+        UIScriptArena = temptemp.GetComponent<UIScriptArena>();
+
         GameObject gameObject = GameObject.Find("Selected");
         Selected = gameObject.GetComponent<Selected>();
 
@@ -23,7 +28,7 @@ public class ArenaButtonAttachee : MonoBehaviour
     {
         Text text = gameObject.GetComponentInChildren<Text>();
         Selected.selectedString = text.text;
-
+        UIScriptArena.selectedTemplateID = templateID;
     }
 
 }

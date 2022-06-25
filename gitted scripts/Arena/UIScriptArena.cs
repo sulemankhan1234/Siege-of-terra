@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIScriptArena : MonoBehaviour
 {
@@ -13,11 +14,19 @@ public class UIScriptArena : MonoBehaviour
     public InputManagerFighterGame InputManagerFighterGame;
     public ComponentData ComponentData;
 
+    /// button panel
     public GameObject buttonPanel;
     public GameObject buttonPrefab;
     public GameObject panelForShips;
+
+
+    /// creating crafts
+    public int selectedTemplateID;
+
+
     public int team;
-    public GameObject prefabForNow;
+    public GameObject prefabForNowID0;
+    public GameObject templatePrefabID1;
     public GameObject gunPrefab;
 
     public GameObject createdShip;
@@ -77,6 +86,7 @@ public class UIScriptArena : MonoBehaviour
             GameObject tempobj = Instantiate(buttonPrefab, buttonPanel.transform);
             Text text =  tempobj.GetComponentInChildren<Text>();
             text.text = SaveManagerArena.SaveData.shipDataToStore[i].templateName;
+            tempobj.GetComponent<ArenaButtonAttachee>().templateID = SaveManagerArena.SaveData.shipDataToStore[i].templateID;
         }
     }
 
@@ -127,9 +137,18 @@ public class UIScriptArena : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
         {
-            
+            GameObject prefabtoUse = prefabForNowID0;
+
+            if (selectedTemplateID == 0)
+            {
+                prefabtoUse = prefabForNowID0;
+            }
+            else if (selectedTemplateID == 1)
+            {
+                prefabtoUse = templatePrefabID1;
+            }
             Debug.Log("goodyar");
-            createdShip = Instantiate(prefabForNow, InputManagerFighterGame.PointClicked(),Quaternion.identity);
+            createdShip = Instantiate(prefabtoUse, InputManagerFighterGame.PointClicked(),Quaternion.identity);
             GameManager.shipList.Add(createdShip);
             createdShip.tag = spawningTeam;
             PositionForGuns();
@@ -207,6 +226,7 @@ public class UIScriptArena : MonoBehaviour
                     tempobj.transform.SetParent(tempt);
 
                     GunAttachee tempgum = tempobj.GetComponent<GunAttachee>();
+                    Debug.Log(componentid);
                     tempgum.shotsPerSalvo = ComponentData.allComponenets2[componentid].shotsPerSalvo;
                     tempgum.timeBetweenSalvos = ComponentData.allComponenets2[componentid].timeBetweenSalvos;
                     tempgum.timeBetweenEachShot = ComponentData.allComponenets2[componentid].timeBetweenEachShot;
@@ -217,6 +237,7 @@ public class UIScriptArena : MonoBehaviour
                     tempgum.bulletDamage = ComponentData.allComponenets2[componentid].bulletDamage;
                     tempgum.bulletSpeed = ComponentData.allComponenets2[componentid].bulletSpeed;
                     tempgum.inaccuracy = ComponentData.allComponenets2[componentid].inaccuracy;
+                    tempgum.myShrapnal = ComponentData.allComponenets2[componentid].bulletShrapnal;
                     //   tempgum.ToRunManuallyAfterStart();
 
 
@@ -237,5 +258,14 @@ public class UIScriptArena : MonoBehaviour
 
     }
 
+    public void ChangeScene() // arena to shipmaker
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(0); // reset arena scene
+    }
  
 }
