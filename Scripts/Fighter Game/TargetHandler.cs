@@ -103,9 +103,9 @@ public class TargetHandler : MonoBehaviour
 
         LayerMask mask = LayerMask.GetMask("selectable");
         Vector3 tempvect3 = new Vector3 (100,100,100);
-        Collider[] collider = Physics.OverlapSphere(gameObject.transform.position, 100,mask);
+        Collider[] collider = Physics.OverlapSphere(gameObject.transform.position, 200,mask);
 
-        if(!Physics.CheckSphere(gameObject.transform.position, 100,mask))
+        if(!Physics.CheckSphere(gameObject.transform.position, 200,mask))
         {
         //    Debug.Log("Player");
             return;
@@ -153,11 +153,11 @@ public class TargetHandler : MonoBehaviour
         {
             // check which guns to fire
             bool L1 = false;
-            bool L2 = false;
-            bool L3 = false;
+          //  bool L2 = false;
+         //   bool L3 = false;
             bool R1 = false;
-            bool R2 = false;
-            bool R3 = false;
+         //   bool R2 = false;
+         //   bool R3 = false;
 
             if (gunL1.transform.localEulerAngles.y > 210 && gunL1.transform.localEulerAngles.y < 360)
             {

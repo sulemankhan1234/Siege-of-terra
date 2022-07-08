@@ -15,6 +15,7 @@ public class FighterMainScript : MonoBehaviour
     public bool stopShooting;
     public float craftHealth = 100;
     public Sprite teamIndicatorSprite;
+    public bool Created;
 
     /// shipInfo
     public int shipTemplateID;
@@ -33,10 +34,20 @@ public class FighterMainScript : MonoBehaviour
 
         TeamIndicator();
 
+
+
     }
 
+
+    private void Update()
+    {
+        if(Created==true)
+        {
+            MainFighterUpdate();
+        }
+    }
     // Update is called once per frame
-   public void MainFighterUpdate() //  thios is in the game manager because somehow the bullets fire trigger overlap
+    public void MainFighterUpdate() //  thios is in the game manager because somehow the bullets fire trigger overlap
     {
         if (GameManager.isPaused == true)
         {
@@ -51,6 +62,8 @@ public class FighterMainScript : MonoBehaviour
     }
  
 
+
+    
 
 
     public void TeamIndicator()

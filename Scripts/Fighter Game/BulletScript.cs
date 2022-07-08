@@ -121,7 +121,7 @@ public class BulletScript : MonoBehaviour
         float heightCircle3 = height / 3;
         float hUse = height;
         float angleToRotate = Vector3.SignedAngle(transform.forward, Vector3.forward, Vector3.up);
-        Debug.Log(angleToRotate);
+       // Debug.Log(angleToRotate);
         Vector3 rotated = new Vector3(0, 0, 0);
 
         for (int c = 0; c < 2; c++)

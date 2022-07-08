@@ -13,6 +13,7 @@ public class GunAttachee : MonoBehaviour
     public string myTag;
 
     public GameObject myTarget;
+    public GameObject myManualTarget;
     public GameObject myShip;
     public float timerBullet;
     public bool bulletShot;
@@ -20,7 +21,7 @@ public class GunAttachee : MonoBehaviour
     public GameObject myShrapnal;
     public float inaccuracy;
 
-    public GameObject indicator;
+    private GameObject indicator;
     public GameObject indicatorprefab;
     public Vector3 leanedTarget;
     
@@ -38,6 +39,8 @@ public class GunAttachee : MonoBehaviour
     public bool salvoGo;
     public float salvoTimer;
     public bool shoot;
+
+    public bool IstargetManual;
 
     private void Start()
     {
@@ -57,7 +60,7 @@ public class GunAttachee : MonoBehaviour
         salvoGo = true;
         salvoTimer = 0;
 
-        indicator = Instantiate(indicatorprefab);
+        //indicator = Instantiate(indicatorprefab);
 
         salvoShotCounter = 0;
         // timeBetweenSalvos = 0;
@@ -66,6 +69,7 @@ public class GunAttachee : MonoBehaviour
             ToRunManuallyAfterStart();
         }
 
+        IstargetManual = false;
 
     }
 
@@ -81,7 +85,28 @@ public class GunAttachee : MonoBehaviour
             return;
         }
 
-        MyTargetSetter();
+
+
+        if(myShip.GetComponent<TweenScript>().rightClickedGameObject == null )
+        {
+           // Debug.Log("null");
+            MyTargetSetter();
+        }
+        else
+        {
+            myManualTarget = myShip.GetComponent<TweenScript>().rightClickedGameObject;
+            if(CheckTargetFirePossibility())
+            {
+                //Debug.Log("go true");
+                myTarget = myManualTarget;
+            }
+            else
+            {
+                //Debug.Log("go false");
+                MyTargetSetter();
+            }
+        }
+
 
         if (myTarget == null)
         {
@@ -243,6 +268,25 @@ public class GunAttachee : MonoBehaviour
     }
 
 
+    public bool CheckTargetFirePossibility()
+    {
+        bool inRange = false;
+        float tempAngle = TargetRangeChecker(myManualTarget);
+
+        if ( myRange == 1 && tempAngle > 0)
+        {
+            inRange = true;
+        }
+
+        if (myRange == 2 && tempAngle < 0)
+        {
+            inRange = true;
+        }
+
+
+        return inRange;
+
+    }
 
     public void MyTargetSetter()
     {
@@ -287,24 +331,24 @@ public class GunAttachee : MonoBehaviour
         Vector3 targetVelocity = myTarget.GetComponent<TweenScript>().myVelocity;
         Vector3 initialDistance = myTarget.transform.position - myShip.transform.position;
         //Vector3 velocitybullet;
-        float velocitybulletF = 70;
+      //  float velocitybulletF = 70;
         float acc = myTarget.GetComponent<TweenScript>().engineThrust;
 
         // quadratic eq
         float a = 0.5f * acc;
-        float b = targetVelocity.magnitude +70;
+        float b = targetVelocity.magnitude  + bulletSpeed;
         float c = initialDistance.magnitude;
 
         float t1 = (b + Mathf.Sqrt(b * b - 4 * a * c)) / acc;
         float t2 = (b - Mathf.Sqrt(b * b - 4 * a * c)) / acc;
-      //  Debug.Log("the value of t1 = " + t1);
-      //  Debug.Log("the value of t2 = " + t2); // correect 1
-
+       // Debug.Log("the value of t1 = " + t1);
+       // Debug.Log("the value of t2 = " + t2); // correect 1
+       // Debug.Log(acc);
        // Vector3 distancedTargetMoved = targetVelocity * t1 + 0.5f * acc * myTarget.transform.forward * t1 * t1;
-        Vector3 distancedTargetMoved2 = targetVelocity * t2 + 0.5f * 0 * myTarget.transform.forward * t2 * t2;
+        Vector3 distancedTargetMoved2 = targetVelocity * t2 + 0.5f * acc*1.2f * myTarget.transform.forward * t2 * t2;
         Vector3 distanceFinal = initialDistance + distancedTargetMoved2;
         Vector3 targetPosition = distanceFinal + myShip.transform.position;
-        indicator.transform.position = targetPosition;
+        //indicator.transform.position = targetPosition;
         leanedTarget = targetPosition;
     }
 

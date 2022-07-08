@@ -1274,6 +1274,7 @@ MonoBehaviour:
   RCSScript: {fileID: 0}
   Selected: {fileID: 0}
   InputManagerFighterGame: {fileID: 0}
+  TargetHandler: {fileID: 0}
   target: {fileID: 0}
   rightClickedGameObject: {fileID: 0}
   rightClickTargetVector3: {x: 0, y: 0, z: 0}
@@ -1286,13 +1287,14 @@ MonoBehaviour:
   isTargetManual: 0
   isMovementManual: 0
   isDestinationManual: 0
+  isHolding: 0
   isFullyManual: 0
   isFullyAuto: 0
   isStopped: 0
   distanceReqToStop: 0
   velocityMagnitudeNeeded: 0
   engineThrust: 1
-  maxVelocity: 10
+  maxVelocity: 3
   rotationSpeed: 90
   bleedVelocity: {x: 0, y: 0, z: 0}
   myVelocity: {x: 0, y: 0, z: 0}
@@ -1301,6 +1303,7 @@ MonoBehaviour:
   directionToFaceAtStop: {x: 0, y: 0, z: 0}
   destinationIndicator: {fileID: 0}
   AIMode: 0
+  myAITarget: {fileID: 0}
 --- !u!114 &2528017334603968986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1390,6 +1393,9 @@ MonoBehaviour:
   stopShooting: 0
   craftHealth: 1000
   teamIndicatorSprite: {fileID: 0}
+  Created: 0
+  shipTemplateID: 0
+  shrepnal: {fileID: 0}
 --- !u!54 &3503429215231943019
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class TweenScript : MonoBehaviour
     public RCSScript RCSScript;
     public Selected Selected;
     public InputManagerFighterGame InputManagerFighterGame;
+    public TargetHandler TargetHandler;
+
 
     public GameObject target;
     public GameObject rightClickedGameObject;
@@ -23,6 +25,8 @@ public class TweenScript : MonoBehaviour
     public bool isTargetManual;
     public bool isMovementManual;
     public bool isDestinationManual;
+
+    public bool isHolding; // for holding position. make it slow down and stop as well.!
     public bool isFullyManual;
     public bool isFullyAuto;
     public bool isStopped;
@@ -32,15 +36,20 @@ public class TweenScript : MonoBehaviour
     public float engineThrust;
     public float maxVelocity;
     public float rotationSpeed =90f;
+
     public Vector3 bleedVelocity;
     public Vector3 myVelocity;
     public Vector3 projectedVector3;
     public Vector3 bleedVShipsForward;
     public Vector3 directionToFaceAtStop;
-
     public GameObject destinationIndicator;
 
-    public int AIMode; // 1=  aggressive, 2 = medium, 3 long.!
+    /// AI Section
+    /// right click follower.!
+    public int AIMode; /// 3 modes changed in ArenaFormatinSetter 1 = hold 3 =push.
+    public GameObject myAITarget;
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +66,8 @@ public class TweenScript : MonoBehaviour
         temptemp = GameObject.Find("inputmanagerFighterGame");
         InputManagerFighterGame = temptemp.GetComponent<InputManagerFighterGame>();
 
+        TargetHandler = this.gameObject.GetComponent<TargetHandler>();
+
         RCSScript = GetComponent<RCSScript>();
 
         DistanceReqToStop();
@@ -67,10 +78,10 @@ public class TweenScript : MonoBehaviour
 
     public void MovementMasterController()
     {
+
         FindDistance();
         FlightModeDecider();
         DistanceReqToStop();
-   
         TargetVelocityCalculator();
         BleedVelocityFinder();
         CalculateBrakingVelocity();
@@ -80,6 +91,23 @@ public class TweenScript : MonoBehaviour
         //CheckforRecalDest(target.transform.position);
         // destination is now set at formation setter, that is where we decide where the craft will go depending on the righttclick
 
+        // If AI
+
+        if (AIMode == 2) // AI mode 2 is rushing.!
+        {
+            AITargetSelection();
+            if (rightClickedGameObject== null)
+            {
+            //    AutoTurn();
+            //    AutoMove();
+                return;
+            }
+            CheckforRecalDest(rightClickedGameObject.transform.position);
+            AutoTurn();
+            AutoMove();
+            return;
+        }
+        // If player
         if (isDestinationManual == true)
         {
             RightClickDestination();
@@ -99,6 +127,7 @@ public class TweenScript : MonoBehaviour
 
         if (isTargetManual == true)
         {
+            
             CheckforRecalDest(rightClickedGameObject.transform.position);
             AutoTurn();
             AutoMove();
@@ -107,6 +136,15 @@ public class TweenScript : MonoBehaviour
         // change direction to face target
         // DirectionToTurn(target.transform.position);
         CalculateAngleToTurn();
+    }
+
+    
+
+    public void AllDecidersOff()
+    {
+        isTargetManual = false;
+        isDestinationManual = false;
+        isMovementManual = false;
     }
 
     public void AutoTurn()
@@ -160,13 +198,18 @@ public class TweenScript : MonoBehaviour
             float rnd = Random.Range(-5f, 5f);
             float valZ = 9 - Mathf.Abs(rnd);
             destination = positionOfTarget + new Vector3(rnd, 0, valZ);
-            GameObject tempobj = Instantiate(destinationIndicator, destination, Quaternion.identity);
-            Destroy(tempobj, 0.1f);
+            //GameObject tempobj = Instantiate(destinationIndicator, destination, Quaternion.identity);
+           // Destroy(tempobj, 0.1f);
     }
 
 
     public void CheckforRecalDest(Vector3 positionOfTarget)
     {
+        if (isHolding == true)
+        {
+            return;
+        }
+
         Vector3 tempvec3 = positionOfTarget - destination;
         if (tempvec3.magnitude > 8)
         {
@@ -386,10 +429,7 @@ public class TweenScript : MonoBehaviour
                     isTargetManual = false;
                 }
             }
-        }
 
-        if (InputManagerFighterGame.rightClicked == true)
-        {
             RightClickForTarget(); // isTargetManual is set inside this fuction.
             //if target is set do this 
             if (isTargetManual == true)
@@ -399,6 +439,7 @@ public class TweenScript : MonoBehaviour
                 isStopped = false;
             }
         }
+
     }
 
     public void RayCastForRightClick()
@@ -438,7 +479,7 @@ public class TweenScript : MonoBehaviour
             return;
         }
 
-        Debug.Log("running");
+        Debug.Log("running enemy clicked");
         LayerMask mask = LayerMask.GetMask("selectable");
         RaycastHit hit;
         Ray ray = InputManagerFighterGame.mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -488,10 +529,39 @@ public class TweenScript : MonoBehaviour
         }
     }
 
-    public void BulletCollisionHandller()
+   public void RightClickToTargetMotion()
     {
 
-    }    
+    }
+
+    /// AI SECTION
+    
+    public void AITargetSelection()
+    {
+        if (rightClickedGameObject == null)
+        {
+
+            Vector3 tempvect3 = new Vector3(100, 100, 100);
+
+            foreach (GameObject i in TargetHandler.listOfTargets)
+            {
+
+
+                Vector3 temp2 = (i.transform.position - transform.position);
+                if (rightClickedGameObject == null)
+                {
+                    rightClickedGameObject = i;
+                }
+
+                if (tempvect3.magnitude > temp2.magnitude)
+                {
+                    rightClickedGameObject = i;
+                    tempvect3 = i.transform.position - transform.position;
+                }
+            }
+
+        }
+    }
 
     public void CraftAI()
     {

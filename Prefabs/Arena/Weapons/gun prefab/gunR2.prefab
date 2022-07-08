@@ -50,22 +50,26 @@ MonoBehaviour:
   LineRenderer: {fileID: 0}
   myRange: 2
   myTag: Team1
-  shoot: 0
   myTarget: {fileID: 0}
   myShip: {fileID: 0}
   timerBullet: 0
   bulletShot: 0
   myProjectile: {fileID: 3332413607634173504, guid: a12a0eac83e35e644bb55bdfad0236e0, type: 3}
+  myShrapnal: {fileID: 0}
   inaccuracy: 0
   indicator: {fileID: 0}
   indicatorprefab: {fileID: 6695409735374814173, guid: bf32713c8b133f843b88dd4c9502b4cc, type: 3}
+  leanedTarget: {x: 0, y: 0, z: 0}
   angleToTarget: 0
   timeBetweenEachShot: 0.04
+  bulletSpeed: 0
+  bulletDamage: 0
   shotsPerSalvo: 0
   timeBetweenSalvos: 0
   salvoShotCounter: 0
   salvoGo: 0
   salvoTimer: 0
+  shoot: 0
 --- !u!120 &4578579810192176302
 LineRenderer:
   m_ObjectHideFlags: 0

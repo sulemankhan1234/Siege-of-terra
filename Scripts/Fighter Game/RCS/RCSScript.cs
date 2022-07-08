@@ -45,7 +45,7 @@ public class RCSScript : MonoBehaviour
     private void Start()
     {
         TweenScript = GetComponent<TweenScript>();
-        FindThrusterPosOnMe();
+       // FindThrusterPosOnMe();
         TurnOffAllThrusters();
         myShip = gameObject;
 
@@ -208,19 +208,19 @@ public class RCSScript : MonoBehaviour
     public void TurnOffAllThrusters()
     {
         PFZnve.SetActive(false);
-        PFZpve.SetActive(false);
+      //  PFZpve.SetActive(false);
         PFX.SetActive(false);
 
         PBZnve.SetActive(false);
-        PBZpve.SetActive(false);
+      //  PBZpve.SetActive(false);
         PBX.SetActive(false);
 
         SFZnve.SetActive(false);
-        SFZpve.SetActive(false);
+     //   SFZpve.SetActive(false);
         SFX.SetActive(false);
 
         SBZnve.SetActive(false);
-        SBZpve.SetActive(false);
+     //   SBZpve.SetActive(false);
         SBX.SetActive(false);
 
         mainEngines.SetActive(false);
@@ -242,36 +242,36 @@ public class RCSScript : MonoBehaviour
 
         //
         temp = tempt2.Find("Port Thrusters Back z pve");
-        PBZpve = temp.gameObject;
+      //  PBZpve = temp.gameObject;
 
         temp = tempt2.Find("Port Thrusters Back z nve");
-        PBZnve = temp.gameObject;
+      //  PBZnve = temp.gameObject;
 
         temp = tempt2.Find("Port Thrusters Back X");
-        PBX = temp.gameObject;
+      //  PBX = temp.gameObject;
 
         //
         temp = tempt2.Find("Starboard Thrusters Back z pve");
-        SBZpve = temp.gameObject;
+      //  SBZpve = temp.gameObject;
 
         temp = tempt2.Find("Starboard Thrusters Back z nve");
-        SBZnve = temp.gameObject;
+      //  SBZnve = temp.gameObject;
 
         temp = tempt2.Find("Starboard Thrusters Back X");
-        SBX = temp.gameObject;
+       // SBX = temp.gameObject;
 
         //
         temp = tempt2.Find("Starboard Thrusters Forward z pve");
-        SFZpve = temp.gameObject;
+       // SFZpve = temp.gameObject;
 
         temp = tempt2.Find("Starboard Thrusters Forward z nve");
-        SFZnve = temp.gameObject;
+       // SFZnve = temp.gameObject;
 
         temp = tempt2.Find("Starboard Thrusters Forward X");
-        SFX = temp.gameObject;
+        //SFX = temp.gameObject;
 
         temp = tempt.Find("Main Engines");
-        mainEngines = temp.gameObject;
+       // mainEngines = temp.gameObject;
 
     }
 

@@ -23,8 +23,15 @@ public class ArenaFormationSetter : MonoBehaviour
 
     public Camera mainCamera;
 
+
+    ///  AI
+    public List<GameObject> formationList;
+
+
     void Start()
     {
+        InputManagerFighterGame.informRightClick += RightClickListener;
+
         GameObject gameObject = GameObject.Find("gameManager");
         GameManager = gameObject.GetComponent<GameManager>();
 
@@ -32,25 +39,19 @@ public class ArenaFormationSetter : MonoBehaviour
         Selected = gameObject.GetComponent<Selected>();
     }
 
-    // Update is called once per frame
+    /// listeneres
+    /// 
+    public void RightClickListener()
+    {
+
+    }
 
 
     public void FormationSetter()
     {
-       // Debug.Log("runing");
+        // Debug.Log("runing");
         int tempSelectedCrafts = Selected.selectedGameObjectsArray.Length;
-        bool even;
-
-        if (tempSelectedCrafts % 2 == 0)
-        {
-            // even
-            even = true;
-        }
-        else
-        {
-            // odd
-            even = false;
-        }
+     
 
         double result = Mathf.Sqrt(tempSelectedCrafts);
         bool isSquare = result % 1 == 0;
@@ -59,7 +60,7 @@ public class ArenaFormationSetter : MonoBehaviour
         //Debug.Log(even);
 
         int sizeRows;
-       // int sizeColumn;
+        // int sizeColumn;
         int distanceObj = 8;
 
         if (isSquare)
@@ -72,32 +73,32 @@ public class ArenaFormationSetter : MonoBehaviour
             sizeRows = (int)Mathf.Sqrt(tempSelectedCrafts) + 1;
         }
 
-      //  Debug.Log(Selected.selectedGameObjectsArray.Length);
-      //  Debug.Log(even);
-       // Debug.Log(sizeRows); 
+        //  Debug.Log(Selected.selectedGameObjectsArray.Length);
+        //  Debug.Log(even);
+        // Debug.Log(sizeRows); 
         //Debug.Log(sizeColumn);
 
         //Vector3 tempvec3 = Selected.rightClickedHere;
         RightClickPos();
         //Vector3 tempvec3 = rightClickPosition;
         Vector3 tempvec3 = startOfRightClick;
-        Vector3[,] posOfCrafts = new Vector3[sizeRows,sizeRows];
+        Vector3[,] posOfCrafts = new Vector3[sizeRows, sizeRows];
         int i = 0;
-        float startPointX = (sizeRows-1)*distanceObj/2;
-        float startPointZ = (sizeRows-1) * distanceObj / 2;
+        float startPointX = (sizeRows - 1) * distanceObj / 2;
+        float startPointZ = (sizeRows - 1) * distanceObj / 2;
 
-        for(int z = 0; z < sizeRows; z++ ) //rows
+        for (int z = 0; z < sizeRows; z++) //rows
         {
-            for(int x = 0; x < sizeRows; x++) // columns
+            for (int x = 0; x < sizeRows; x++) // columns
             {
-               
-                
-                if(i == Selected.selectedGameObjectsArray.Length)
+
+
+                if (i == Selected.selectedGameObjectsArray.Length)
                 {
                     break;
                 }
                 /// assign position in formation here.!
-                posOfCrafts[x, z] = tempvec3 + new Vector3 (distanceObj*x - startPointX, 0,distanceObj*z - startPointZ);
+                posOfCrafts[x, z] = tempvec3 + new Vector3(distanceObj * x - startPointX, 0, distanceObj * z - startPointZ);
 
                 /// doing calculations to turn formation to align with desired direction here
                 // find angle between the 2 directions
@@ -116,7 +117,7 @@ public class ArenaFormationSetter : MonoBehaviour
                 newPos.z = distOfCraft.z * Mathf.Cos(angleTemp1) + distOfCraft.x * Mathf.Sin(angleTemp1) + tempvec3.z;
                 newPos.x = distOfCraft.x * Mathf.Cos(angleTemp1) - distOfCraft.z * Mathf.Sin(angleTemp1) + tempvec3.x;
                 newPos.y = posOfCrafts[x, z].y;
-                Debug.Log(angleTemp1);
+              //  Debug.Log(angleTemp1);
 
                 /// other settings 
                 TweenScript temptween = Selected.selectedGameObjectsArray[i].GetComponent<TweenScript>();
@@ -135,17 +136,17 @@ public class ArenaFormationSetter : MonoBehaviour
 
 
                 Selected.selectedGameObjectsArray[i].GetComponent<LineRenderer>().SetPositions(tempVertices);
-                
+
                 StartCoroutine(waiter(Selected.selectedGameObjectsArray[i]));
 
-              //  Debug.Log("value of X is: " + x + " value of Z is: " + z + ".");
-               // Debug.Log(posOfCrafts[x, z]);
+                //  Debug.Log("value of X is: " + x + " value of Z is: " + z + ".");
+                // Debug.Log(posOfCrafts[x, z]);
 
                 //Debug.Log(i);
                 i++;
 
             }
-        }   
+        }
     }
 
     public void RightClickPos()
@@ -165,6 +166,68 @@ public class ArenaFormationSetter : MonoBehaviour
         }
     }
 
+    public void FormationMasterMainMain()
+    {
+        if(CheckRightClickedOncraft())
+        {
+            AttackFormation();
+        }
+        else
+        {
+            VectorTargeting();
+        }
+
+    }
+
+    public bool CheckRightClickedOncraft()
+    {
+        bool temp = false;
+        LayerMask mask = LayerMask.GetMask("selectable");
+        // int layermask = 1 << 7;
+        RaycastHit hit;
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+        {
+            temp = true;
+        }
+
+        return temp;
+    }
+
+    public void AttackFormation()
+    {
+        if (Input.GetMouseButtonDown(1) && EventSystem.current.IsPointerOverGameObject() == false)
+        {
+
+            LayerMask mask = LayerMask.GetMask("selectable");
+            // int layermask = 1 << 7;
+            RaycastHit hit;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+            {
+
+                if (hit.collider.gameObject.tag != "Team1")
+                {
+                    return;
+                }
+
+                foreach (GameObject i in Selected.selectedGameObjectsArray)
+                {
+                    i.GetComponent<TweenScript>().AllDecidersOff();
+                    i.GetComponent<TweenScript>().isTargetManual = true;
+                    i.GetComponent<TweenScript>().rightClickedGameObject = hit.collider.gameObject;
+
+                }
+
+            }
+        }
+    }
+
+    public void AttackFormationSettingsSetter()
+    {
+
+    }
+
     public void VectorTargeting()
     {
         // same thing for rightclick drag.
@@ -180,7 +243,7 @@ public class ArenaFormationSetter : MonoBehaviour
         }
 
         //if clicked on enemy
-    
+
 
 
         //Start point 
@@ -282,26 +345,38 @@ public class ArenaFormationSetter : MonoBehaviour
     // when right clicked on an enemy object 
     //just move towards the enemy and start shooting when in AI mode range
 
-    public void FormationMoveToIntercept()
-    {
-        
-    }
+    /// AI <AI>
+    /// 
+    /// make list of crafts that hold enemy team.
+    /// make fixed formation.
+    /// empty game object, with smaller game objects.
+    /// turn parent turn all
+    /// make smaller formations
+    /// make bool move with formation true or not
+    /// 
+    /// 3 modes of AI Formations 
+    /// hold (if you have long range attack) 1 
+    /// Push Flank 1 or both (to catch straglers) 2
+    /// push all as 1 () 3
+    /// have a predetermined strategy and sometimes faint.!
+    /// 
+    /// Craft Attachee
+    /// takes destination
+    /// takes target for attack
+    /// take engage mode
+    /// 
+    /// 
+    /// 
+    /// 
+
+    /// make class fixed formations.
+    /// make sure to Create reference of the foramtion in this script.
+    /// 
+    /// 
+    /// 
+    /// make way to select formations.
 
 }
 
-public class Formations
-{
-    public int formationID;
-    public int tempFormationID;
-    public List<FormationNodeInfoClass> formationNodeInfoList;
-}
 
-public class FormationNodeInfoClass
-{
-    public int craftID;
-    public Vector3 positionInWorldCoordinate;
-    public int preferedCraftType;
 
-    // will need to give each craft an ID
-    // 
-}

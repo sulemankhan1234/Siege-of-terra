@@ -392,7 +392,68 @@ public class Notes2 : MonoBehaviour
     /// 1b ship data
     /// 1c 
     /// 
+    /// add front section for weapons placement 
+    /// give different sections different colors in grid
+    /// make it work
+    /// 
+    /// make all weapons 
+    /// 
+    /// make ai
+    /// 
+    /// 
+    ///<june_26_2022>
+    /// remake save game <done>
+    /// just add i game instance to the save file. <done>
+    /// 
 
+    /// <june_27_2022>
+    /// make Central AI controller
+    /// Give them List of crafts
+    /// give them formation
+    /// 
+    /// come up with a rearangeing way
+    /// idea 1. linear game fixed enemy types.!
+    /// backliner, frontliner set places when craft destroyed rearrange formations
+    /// 
+    /// idea 2. just put biggest most impotant types infront while smaller longer range at flanks
+    /// 
+    /// idea 3. faster hard hitters at flanks for backline
+    /// 
+    /// idea 4. make hard coded formation maker. that makes a formation like the gridmaker. make formation put crafts there
+    ///         set orientation
+    ///         
+    /// Make one script that handles Enemy AI.
+    /// AI Intercepter.! set range to stop.
+    /// AI long Range Shooter.! 
+    /// 
+    /// 
+    /// <july_3rd_2022>
+    /// make right click attacker. follower <done>
+    /// make hold and right click to attack target.!
+    /// press hold will just trun towards the target and fire not move
+    /// make sure attack clicking makes craft move towards the enemy and attack the same target.
+    /// while other guns fire at other targets.!
+    /// 
+    /// 
+    /// <july_5th_2022>
+    /// AI Mover
+    /// AI mode 1 Hold and shoot
+    ///         1.1 stopping distance
+    /// AI Mode 2 Charge.!
+    /// 
+    /// check if bool is AI is better or not
+    /// 
+    /// mode 2 Tween Script Find Target. Just Charge it.
+    /// 
+    /// mode 1 
+    /// hold means dont move just shoot
+    /// 
+    /// 
+    /// 
+    /// 
+    /// 
+    /// 
+    /// 
 
 
 

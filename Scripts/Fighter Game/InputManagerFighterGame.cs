@@ -61,6 +61,9 @@ public class InputManagerFighterGame : MonoBehaviour
     public bool rightClicked;
     public bool leftClicked;
 
+    public delegate void rightClick();
+    public static event rightClick informRightClick;
+
 
     private void Start()
     {

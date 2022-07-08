@@ -120,9 +120,9 @@ public class UIScriptArena : MonoBehaviour
         // make rapid fire ewapons 3 round burst weapons, flack weapons etc.
 
        if (GameManager.isPaused == false)
-        {
+       {
             return;
-        }
+       }
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -151,6 +151,11 @@ public class UIScriptArena : MonoBehaviour
             createdShip = Instantiate(prefabtoUse, InputManagerFighterGame.PointClicked(),Quaternion.identity);
             GameManager.shipList.Add(createdShip);
             createdShip.tag = spawningTeam;
+            if (spawningTeam == "Team1")
+            {
+                createdShip.GetComponent<TweenScript>().AIMode = 2;
+            }
+
             PositionForGuns();
         }
     }
@@ -244,9 +249,9 @@ public class UIScriptArena : MonoBehaviour
                     // ComponentData.allComponenets2[componentid]
 
 
-                    Debug.Log(SaveManagerArena.SaveData.shipDataToStore[tempnum].templateGrid[xx, zz]);
-                    Debug.Log(xval);
-                    Debug.Log(zval);
+                  //  Debug.Log(SaveManagerArena.SaveData.shipDataToStore[tempnum].templateGrid[xx, zz]);
+                  //  Debug.Log(xval);
+                  //  Debug.Log(zval);
 
                 }
 

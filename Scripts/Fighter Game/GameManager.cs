@@ -46,7 +46,8 @@ public class GameManager : MonoBehaviour
         }
 
 
-        ArenaFormationSetter.VectorTargeting();
+        // ArenaFormationSetter.VectorTargeting();
+        ArenaFormationSetter.FormationMasterMainMain();
         //if(InputManagerFighterGame.rightClicked)
         //{
         //    ArenaFormationSetter.FormationSetter();
@@ -56,9 +57,13 @@ public class GameManager : MonoBehaviour
 
     public void FindAllFighterMainScripts() // will run when play button is pressed.!
     {
-        foreach(GameObject i in shipList)
+        fighterMainScriptsList.Clear();
+        foreach (GameObject i in shipList)
         {
+
             fighterMainScriptsList.Add(i.GetComponent<FighterMainScript>());
+
+
         }
     }
 }
