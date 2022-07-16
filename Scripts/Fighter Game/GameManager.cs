@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public delegate void TimeTick();
+    public static event TimeTick TimeTickInfo;
+    
+
     public FighterController FighterController; // this is the input manager for now
     public InputManagerFighterGame InputManagerFighterGame;
     public ArenaFormationSetter ArenaFormationSetter;
 
     public Selected Selected;
-
+    public float time;
     public bool isPaused;
     public List<GameObject> shipList;
     public List<TweenScript> tweenList;
     public List<FighterMainScript> fighterMainScriptsList;
+
+    public float timeTick;
+
 
     
    // public bool runOnceTween;
@@ -36,13 +43,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-
+        TickTick();
         InputManagerFighterGame.InputUpdate();
         
         foreach (FighterMainScript i in fighterMainScriptsList)
         {
             i.MainFighterUpdate();
-
         }
 
 
@@ -64,6 +70,19 @@ public class GameManager : MonoBehaviour
             fighterMainScriptsList.Add(i.GetComponent<FighterMainScript>());
 
 
+        }
+    }
+
+    public void TickTick()
+    {
+        time = time + Time.deltaTime;
+        if (time > 0.01f)
+        {
+            if(TimeTickInfo != null)
+            {
+                TimeTickInfo();
+            }
+            time = 0;
         }
     }
 }

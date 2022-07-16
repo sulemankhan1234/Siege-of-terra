@@ -449,11 +449,88 @@ public class Notes2 : MonoBehaviour
     /// hold means dont move just shoot
     /// 
     /// 
+    /// <July_8th_2022>
+    /// Animation Start
+    /// Watch Lesson <done>
+    /// try out make engine effect <done>
+    /// 
+    /// <july_9th_2022>
+    /// Make engine effect <done>
+    /// Make Small Explosion Effect.
+    /// Make Shrapnel Effect. <done>
+    /// make Donut smoke effect. <done>
+    /// Make spark effect.
+    /// 
+    /// <july_10th_2022>
+    /// Make Sprites for guns <all_yellow>
+    /// Gun 1 Simple Machine gun 3 round burst
+    /// Gun 2 simple Machine gun 5 round burst 
+    /// Gun 3 Simple machie gun 3 round burst explosing ammo <Yellowish_green>
+    /// 
+    /// Cannon 1 light flak 0.5 sec // <all_red> <redish_yellow>
+    /// Cannon 2 3 round burst 1 sec
+    /// cannon 3 2  round 2 sec delay AP round
+    /// 
+    /// Gun 4 heavy Cannon 2 sec delay
+    /// Gun 6 Heavy cannon 2 round burst exploding round Longer range
+    /// 
+    /// Gun 7 Torpeedo
+    ///  
+    /// Advance Gun 1 PDC system
+    /// Advance Gun 2 Rail Gun 5 sec 
+    /// 
+    /// <july_11th_2022>
+    /// particle Tutorial try all renderers
+    /// read all rendereers description and how they work and their niches
+    /// 
+    /// 
+    /// 
+    /// <july_12th_2022>
+    /// Make bullet prefab for all weapons
+    /// Final today.
+    /// fill in component data for these.!
+    /// Events and delecgates
+    /// 
+    /// <july_13th_2022>
+    /// simple bullet hit sparks
+    /// bullet fire flash
+    /// 
+    /// damage smoke
+    /// damage fire
+    /// damage sparks
+    /// gass venting.
+    /// generic sparks.!
+    /// 
+    /// bullet tumble after hit
+    /// bullet rickocher
+    /// 
+    /// 
+    /// <july_15th_2022>
+    /// Make impact flash 
+    /// make muzzle flash
+    /// damage smoke
+    /// damage fire
+    /// damage vent gas
+    /// 
+    /// 
+    /// <july_16th_2022>
+    /// event delegates.!
+    /// subscribe 
+    /// unsubscribe list.!
     /// 
     /// 
     /// 
     /// 
+    /// <stuff_that_might_be_copy_right_issuer>
+    /// muzzle flash. in zart folder newscripst
     /// 
+    /// <a href="https://www.freepik.com/vectors/gun-fire">Gun fire vector created by macrovector - www.freepik.com</a>
+    /// <a href="https://www.freepik.com/vectors/gun-fire">Gun fire vector created by upklyak - www.freepik.com</a>
+    /// 
+
+
+
+
 
 
 

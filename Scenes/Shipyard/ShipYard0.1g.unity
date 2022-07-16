@@ -22618,7 +22618,6 @@ MonoBehaviour:
   selectedShipTemplate:
     templateName: 
     templateID: 0
-    templateSprite: {fileID: 0}
     templateGridMaxX: 0
     templateGridMaxY: 0
   ShipData: {fileID: 1936776746}
@@ -25941,13 +25940,11 @@ MonoBehaviour:
   ship1:
     templateName: 
     templateID: 0
-    templateSprite: {fileID: 0}
     templateGridMaxX: 0
     templateGridMaxY: 0
   ship2:
     templateName: 
     templateID: 0
-    templateSprite: {fileID: 0}
     templateGridMaxX: 0
     templateGridMaxY: 0
   PlacementScript: {fileID: 1720715645}
@@ -26406,16 +26403,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerCompImage01: {fileID: 0}
-  weaponsCompImage11: {fileID: 21300000, guid: c95f72f67ff625c459a82a431e7f3bdc, type: 3}
-  weaponsCompImage12: {fileID: 21300000, guid: e517e4915ac862049bb5110a64040445, type: 3}
-  weaponsCompImage13: {fileID: 21300000, guid: a1f822bc3126591408eea1bb3ea40cdd, type: 3}
-  weaponsCompImage14: {fileID: 21300000, guid: ae1da5849ef5bf3458bb6abbd1349ae3, type: 3}
+  weaponsCompImage11: {fileID: 21300000, guid: 2805d67e61146244a8b6d73365f45152, type: 3}
+  weaponsCompImage12: {fileID: 21300000, guid: c529ad60c3166af499435e22b77445c7, type: 3}
+  weaponsCompImage13: {fileID: 21300000, guid: b7e6c0e845c4f1042bd12412b0a45e3b, type: 3}
+  weaponsCompImage14: {fileID: 21300000, guid: 0f3a9438a8f7cf64686131a2b572958d, type: 3}
+  weaponsCompImage15: {fileID: 21300000, guid: 0f3a9438a8f7cf64686131a2b572958d, type: 3}
+  weaponsCompImage16: {fileID: 21300000, guid: 0f3a9438a8f7cf64686131a2b572958d, type: 3}
   armourCompImage21: {fileID: 21300000, guid: 7c24de4d5347bd444aaa163ada1dd3c0, type: 3}
   batteryCompImage31: {fileID: 21300000, guid: 6d292f666fd0a62458701da3abf72ab9, type: 3}
   batteryCompImage32: {fileID: 21300000, guid: 6d292f666fd0a62458701da3abf72ab9, type: 3}
   bulletPrefab11: {fileID: 0}
   bulletPrefab12: {fileID: 0}
   bulletPrefab13: {fileID: 0}
+  bulletPrefab14: {fileID: 0}
+  bulletPrefab15: {fileID: 0}
+  bulletPrefab16: {fileID: 0}
   torpeedoPrefab11: {fileID: 0}
   bulletShrepnal12: {fileID: 0}
 --- !u!1 &1998489696

@@ -148,19 +148,21 @@ public class UIScriptArena : MonoBehaviour
                 prefabtoUse = templatePrefabID1;
             }
             Debug.Log("goodyar");
-            createdShip = Instantiate(prefabtoUse, InputManagerFighterGame.PointClicked(),Quaternion.identity);
-            GameManager.shipList.Add(createdShip);
-            createdShip.tag = spawningTeam;
+            //createdShip = Instantiate(prefabtoUse, InputManagerFighterGame.PointClicked(),Quaternion.identity);
+            GameObject createdShipp = new GameObject();
+            createdShipp = Instantiate(prefabtoUse, InputManagerFighterGame.PointClicked(),Quaternion.identity);
+            GameManager.shipList.Add(createdShipp);
+            createdShipp.tag = spawningTeam;
             if (spawningTeam == "Team1")
             {
-                createdShip.GetComponent<TweenScript>().AIMode = 2;
+                createdShipp.GetComponent<TweenScript>().AIMode = 2;
             }
 
-            PositionForGuns();
+            PositionForGuns(createdShipp);
         }
     }
 
-    public void PositionForGuns()
+    public void PositionForGuns(GameObject createdShipp)
     {
         posForComponents = new Vector3[5, 10];
         // position will be set some distance from the centre of the ship.
@@ -226,41 +228,41 @@ public class UIScriptArena : MonoBehaviour
                         angle = 90;
                     }
 
-                    GameObject tempobj = Instantiate(gunPrefab, createdShip.transform.position +new Vector3(xval, 0 ,zval), Quaternion.Euler(createdShip.transform.rotation.eulerAngles.x, createdShip.transform.rotation.eulerAngles.y+angle, createdShip.transform.rotation.eulerAngles.z));
-                    Transform tempt =createdShip.transform.Find("guns");
+                    GameObject tempobj = Instantiate(gunPrefab, createdShipp.transform.position +new Vector3(xval, 0.33f ,zval), Quaternion.Euler(createdShipp.transform.rotation.eulerAngles.x, createdShipp.transform.rotation.eulerAngles.y+angle, createdShipp.transform.rotation.eulerAngles.z));
+                    Transform tempt =createdShipp.transform.Find("guns");
                     tempobj.transform.SetParent(tempt);
 
                     GunAttachee tempgum = tempobj.GetComponent<GunAttachee>();
+                    createdShipp.GetComponent<FighterMainScript>().listOfGuns.Add(tempobj.GetComponent<GunAttachee>());
+                    Debug.Log(createdShipp.GetComponent<FighterMainScript>().listOfGuns.Count);
                     Debug.Log(componentid);
                     tempgum.shotsPerSalvo = ComponentData.allComponenets2[componentid].shotsPerSalvo;
                     tempgum.timeBetweenSalvos = ComponentData.allComponenets2[componentid].timeBetweenSalvos;
                     tempgum.timeBetweenEachShot = ComponentData.allComponenets2[componentid].timeBetweenEachShot;
                     tempgum.myRange = range;
                     tempgum.myTag = "team2";
-                    tempgum.myShip = createdShip;
+                    tempgum.myShip = createdShipp;
                     tempgum.myProjectile = ComponentData.allComponenets2[componentid].bulletPrefab;
                     tempgum.bulletDamage = ComponentData.allComponenets2[componentid].bulletDamage;
                     tempgum.bulletSpeed = ComponentData.allComponenets2[componentid].bulletSpeed;
                     tempgum.inaccuracy = ComponentData.allComponenets2[componentid].inaccuracy;
                     tempgum.myShrapnal = ComponentData.allComponenets2[componentid].bulletShrapnal;
+                    tempgum.myComponentID = ComponentData.allComponenets2[componentid].componentID;
                     //   tempgum.ToRunManuallyAfterStart();
 
 
                     // ComponentData.allComponenets2[componentid]
 
 
-                  //  Debug.Log(SaveManagerArena.SaveData.shipDataToStore[tempnum].templateGrid[xx, zz]);
-                  //  Debug.Log(xval);
-                  //  Debug.Log(zval);
+                    //  Debug.Log(SaveManagerArena.SaveData.shipDataToStore[tempnum].templateGrid[xx, zz]);
+                    //  Debug.Log(xval);
+                    //  Debug.Log(zval);
 
                 }
-
-
-
             }
         }
 
-
+        createdShipp.GetComponent<FighterMainScript>().FindAllMyGuns();
     }
 
     public void ChangeScene() // arena to shipmaker
@@ -272,5 +274,7 @@ public class UIScriptArena : MonoBehaviour
     {
         SceneManager.LoadScene(0); // reset arena scene
     }
+
+    
  
 }

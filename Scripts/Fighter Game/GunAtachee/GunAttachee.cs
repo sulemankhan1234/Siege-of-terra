@@ -11,6 +11,7 @@ public class GunAttachee : MonoBehaviour
 
     public int myRange; // 1 for port, 2 for starboard, 3 for front.
     public string myTag;
+    public int myComponentID;
 
     public GameObject myTarget;
     public GameObject myManualTarget;
@@ -24,7 +25,7 @@ public class GunAttachee : MonoBehaviour
     private GameObject indicator;
     public GameObject indicatorprefab;
     public Vector3 leanedTarget;
-    
+    public float rndLast;
 
     public float angleToTarget;
     public float timeBetweenEachShot;
@@ -41,6 +42,7 @@ public class GunAttachee : MonoBehaviour
     public bool shoot;
 
     public bool IstargetManual;
+    public ParticleSystem muzzleFlash;
 
     private void Start()
     {
@@ -49,8 +51,11 @@ public class GunAttachee : MonoBehaviour
 
         LineRenderer = gameObject.GetComponent<LineRenderer>();
 
+        GameObject tempora = GameObject.Find("Muzzle Flash");
+        muzzleFlash = tempora.GetComponent<ParticleSystem>();
 
         //timeBetweenEachShot = 0.04f;
+
 
         TargetHandler = GetComponentInParent<TargetHandler>();
         FighterMainScript = GetComponentInParent<FighterMainScript>();
@@ -71,6 +76,16 @@ public class GunAttachee : MonoBehaviour
 
         IstargetManual = false;
 
+    }
+
+    private void OnEnable()
+    {
+        GameManager.TimeTickInfo += TickTester;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.TimeTickInfo -= TickTester;
     }
 
     private void Update()
@@ -117,6 +132,13 @@ public class GunAttachee : MonoBehaviour
         GunHandler();
     }
 
+    IEnumerator ParticleRunner()
+    {
+        yield return new WaitForSeconds(0.0001f);
+        MuzzleFlashParticleHandler();
+        //Your Function You Want to Call
+    }
+
     public void ToRunManuallyAfterStart()
     {
         myShip = this.gameObject;
@@ -154,7 +176,10 @@ public class GunAttachee : MonoBehaviour
             if (myRange == 1 && angleToTarget > 0 && timerBullet > 0)  // -ve is starboard +ve is portside
             {
                 // Debug.Log(gunL1.transform.rotation.eulerAngles);
-                float rnd = Random.Range(-inaccuracy, inaccuracy);
+                float rnd2 = Random.Range(-inaccuracy, inaccuracy);
+                float rnd;
+                rnd = rnd2 + rndLast*0.5f;
+ 
                 var rotationtemp = transform.rotation;
                 rotationtemp.y = rotationtemp.y + rnd;
                 GameObject tempbullet;
@@ -170,12 +195,20 @@ public class GunAttachee : MonoBehaviour
                 tempbullet.GetComponent<BulletScript>().sizeOfShip = sizeOfShip;
                 tempbullet.GetComponent<BulletScript>().shipThickness = sizeX;
                 tempbullet.GetComponent<BulletScript>().shrepnalPrefab = myShrapnal;
+                tempbullet.GetComponent<BulletScript>().myComponentID = myComponentID;
+                StartCoroutine(ParticleRunner());
+
+              //  MuzzleFlashParticleHandler();
+                rndLast = rnd;
             }
 
             if (myRange == 2 && angleToTarget < 0 && timerBullet > 0) // +ve is starboard -ve is portside
             {
+
                 GameObject tempbullet;
-                float rnd = Random.Range(-inaccuracy, inaccuracy);
+                float rnd2 = Random.Range(-inaccuracy, inaccuracy);
+                float rnd;
+                rnd = rnd2 + rndLast * 0.5f;
                 var rotationtemp = transform.rotation;
                 rotationtemp.y = rotationtemp.y + rnd;
                 tempbullet = Instantiate(myProjectile, transform.position, rotationtemp);
@@ -190,13 +223,18 @@ public class GunAttachee : MonoBehaviour
                 tempbullet.GetComponent<BulletScript>().sizeOfShip = sizeOfShip;
                 tempbullet.GetComponent<BulletScript>().shipThickness = sizeX;
                 tempbullet.GetComponent<BulletScript>().shrepnalPrefab = myShrapnal;
-
+                tempbullet.GetComponent<BulletScript>().myComponentID = myComponentID;
+                StartCoroutine(ParticleRunner());
+                // MuzzleFlashParticleHandler();
+                rndLast = rnd;
             }
 
 
             if (myRange == 3 && angleToTarget > -45 && angleToTarget < 45 && timerBullet > 0) // +ve is starboard -ve is portside
             {
-                float rnd = Random.Range(-inaccuracy, inaccuracy);
+                float rnd2 = Random.Range(-inaccuracy, inaccuracy);
+                float rnd;
+                rnd = rnd2 + rndLast * 0.5f;
                 var rotationtemp = transform.rotation;
                 rotationtemp.y = rotationtemp.y + rnd;
                 GameObject tempbullet;
@@ -212,6 +250,10 @@ public class GunAttachee : MonoBehaviour
                 tempbullet.GetComponent<BulletScript>().sizeOfShip = sizeOfShip;
                 tempbullet.GetComponent<BulletScript>().shipThickness = sizeX;
                 tempbullet.GetComponent<BulletScript>().shrepnalPrefab = myShrapnal;
+                tempbullet.GetComponent<BulletScript>().myComponentID = myComponentID;
+                StartCoroutine(ParticleRunner());
+                //  MuzzleFlashParticleHandler();
+                rndLast = rnd;
             }
 
             timerBullet = 0;
@@ -358,6 +400,19 @@ public class GunAttachee : MonoBehaviour
         // give add reference
         // find target draw ray to the target.
     }
-    
 
+    public void MuzzleFlashParticleHandler()
+    {
+        var shape = muzzleFlash.shape;
+
+        shape.position = gameObject.transform.position + gameObject.transform.forward.normalized *0.5f;
+        shape.rotation = gameObject.transform.rotation.eulerAngles;
+        // sh.scale = new Vector3(0.5f, 0.5f, 0.5f);
+        muzzleFlash.Play();
+    }
+    
+    public void TickTester()
+    {
+       // Debug.Log("this Tick Ran at some time");
+    }
 }

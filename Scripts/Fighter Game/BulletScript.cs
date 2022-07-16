@@ -10,9 +10,27 @@ public class BulletScript : MonoBehaviour
     public GameManager GameManager;
     public GameObject enemyShip;
     public GameObject shrepnalPrefab;
-	//public RaycastHit raycasthit;
-    
-	public float bulletspeed;
+
+
+     /// particle System
+
+    public ParticleSystem splinterParticleSystem;
+    public ParticleSystem donutParticleSystem;
+
+    public ParticleSystem splinterParticleSystemLightcannon;
+    public ParticleSystem donutParticleSystemLightcannon;
+
+    public ParticleSystem simpleBulletHit;
+    public ParticleSystem simpleBulletFireMuzzleFlash;
+    public ParticleSystem damageSmoke;
+    public ParticleSystem damageFire;
+    public ParticleSystem damageSparks;
+    public ParticleSystem atmoVent;
+    public ParticleSystem bulletTumble;
+    public ParticleSystem bulletRicochet;
+    //public RaycastHit raycasthit;
+
+    public float bulletspeed;
     public float bulletDamage;
     private float timer = 0;
     private float SpinRND;
@@ -40,9 +58,23 @@ public class BulletScript : MonoBehaviour
         GameObject gameObject = GameObject.Find("gameManager");
         GameManager = gameObject.GetComponent<GameManager>();
 
+        GameObject pp = GameObject.Find("Shrapnel Particles");
+        splinterParticleSystem = pp.GetComponent<ParticleSystem>();
+        pp = GameObject.Find("Donut Particles");
+        donutParticleSystem = pp.GetComponent<ParticleSystem>();
+
+        pp = GameObject.Find("Donut Particles light Cannon");
+        donutParticleSystemLightcannon = pp.GetComponent<ParticleSystem>();
+        pp = GameObject.Find("Shrapnel particles light cannon");
+        splinterParticleSystemLightcannon= pp.GetComponent<ParticleSystem>();
+
+        pp = GameObject.Find("Simple Hit Spark");
+        simpleBulletHit = pp.GetComponent<ParticleSystem>();
+
+
 
         TorpedoMovement = this.gameObject.GetComponent<TorpedoMovement>();
-      
+
 
     }
 
@@ -105,7 +137,23 @@ public class BulletScript : MonoBehaviour
         tempDistance = distance;
         if (distance.magnitude <sizeOfShip && distance.magnitude < 2.0)
         {
-            ExplosiveRound();
+          //  Debug.Log("explode");
+            // ExplosiveRound();
+            if (myComponentID == 13 )
+            {
+                RunParticleSystem();
+            }
+
+           else if ( myComponentID == 14)
+            {
+                MediumCannonParticleSystem();
+            }
+
+            else
+            {
+                SimpleBulletHitSpark();
+            }
+
             enemyShip.GetComponent<FighterMainScript>().HitHitHit(this.gameObject);
         }
     }
@@ -163,5 +211,42 @@ public class BulletScript : MonoBehaviour
        // newPos.z = distOfCraft.z * Mathf.Cos(angleTemp1) + distOfCraft.x * Mathf.Sin(angleTemp1) + tempvec3.z;
       //  newPos.x = distOfCraft.x * Mathf.Cos(angleTemp1) - distOfCraft.z * Mathf.Sin(angleTemp1) + tempvec3.x;
       //  newPos.y = posOfCrafts[x, z].y;
+    }
+
+    public void RunParticleSystem()
+    {
+        var sh = splinterParticleSystem.shape;
+        sh.position = gameObject.transform.position + gameObject.transform.forward.normalized*-5;
+        sh.rotation = gameObject.transform.rotation.eulerAngles;
+        // sh.scale = new Vector3(0.5f, 0.5f, 0.5f);
+        splinterParticleSystem.Play();
+
+        var donut = donutParticleSystem.shape;
+        donut.position = gameObject.transform.position + gameObject.transform.forward.normalized * -5;
+        donut.rotation = gameObject.transform.rotation.eulerAngles;
+        donutParticleSystem.Play();
+    }
+
+    public void MediumCannonParticleSystem()
+    {
+        var sh = splinterParticleSystemLightcannon.shape;
+        sh.position = gameObject.transform.position + gameObject.transform.forward.normalized * -5;
+        sh.rotation = gameObject.transform.rotation.eulerAngles;
+        // sh.scale = new Vector3(0.5f, 0.5f, 0.5f);
+        splinterParticleSystemLightcannon.Play();
+
+        var donut = donutParticleSystemLightcannon.shape;
+        donut.position = gameObject.transform.position + gameObject.transform.forward.normalized * -5;
+        donut.rotation = gameObject.transform.rotation.eulerAngles;
+        donutParticleSystemLightcannon.Play();
+    }
+
+    public void SimpleBulletHitSpark()
+    {
+        var shape = simpleBulletHit.shape;
+        shape.position = gameObject.transform.position;
+        shape.rotation = gameObject.transform.rotation.eulerAngles + new Vector3 (0,180,0);
+        // sh.scale = new Vector3(0.5f, 0.5f, 0.5f);
+        simpleBulletHit.Play();
     }
 }

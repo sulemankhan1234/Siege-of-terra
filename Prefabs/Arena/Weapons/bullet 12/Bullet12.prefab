@@ -146,10 +146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd62622f00ced14f8f395cd7c5263a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TorpedoMovement: {fileID: 0}
   mainCamera: {fileID: 0}
   mousePosClick0: {x: 0, y: 0, z: 0}
   GameManager: {fileID: 0}
   enemyShip: {fileID: 0}
+  shrepnalPrefab: {fileID: 0}
+  splinterParticleSystem: {fileID: 0}
+  donutParticleSystem: {fileID: 0}
   bulletspeed: 0
   bulletDamage: 0
   isNormalBullet: 1
@@ -158,6 +162,7 @@ MonoBehaviour:
   enemyTeamTag: 
   myTeamTag: 
   tempDistance: {x: 0, y: 0, z: 0}
+  myComponentID: 0
   sizeOfShip: 0
   dbBulletDistance: 0
   shipThickness: 0
@@ -445,7 +450,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3812f9631d32fea47b2f5b59228ae0f3, type: 2}
+  - {fileID: 2100000, guid: d9e352ebbe1e3d84bac07b6cf6eef038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -540,7 +545,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3812f9631d32fea47b2f5b59228ae0f3, type: 2}
+  - {fileID: 2100000, guid: d9e352ebbe1e3d84bac07b6cf6eef038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -635,7 +640,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3812f9631d32fea47b2f5b59228ae0f3, type: 2}
+  - {fileID: 2100000, guid: d9e352ebbe1e3d84bac07b6cf6eef038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -730,7 +735,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3812f9631d32fea47b2f5b59228ae0f3, type: 2}
+  - {fileID: 2100000, guid: d9e352ebbe1e3d84bac07b6cf6eef038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -10,6 +10,9 @@ public class FighterMainScript : MonoBehaviour
     public TweenScript TweenScript;
     public RCSScript RCSScript;
 
+    public List<GunAttachee> listOfGuns;
+    public GunAttachee[] arrayOfGuns;
+
     public string myTag;
     public bool stopMovement;
     public bool stopShooting;
@@ -34,7 +37,8 @@ public class FighterMainScript : MonoBehaviour
 
         TeamIndicator();
 
-
+        // listOfGuns = new List<GunAttachee>();
+        
 
     }
 
@@ -92,9 +96,21 @@ public class FighterMainScript : MonoBehaviour
 
         if (craftHealth < 0)
         {
-            GameManager.fighterMainScriptsList.Remove(gameObject.GetComponent<FighterMainScript>());
+            UnSubFunction();
             GameObject.Destroy(this.gameObject);
         }
 
+    }
+
+
+    public void UnSubFunction()
+    {
+        GameManager.fighterMainScriptsList.Remove(gameObject.GetComponent<FighterMainScript>());
+    }
+
+    public void FindAllMyGuns()
+    {
+        Transform guns = gameObject.transform.Find("guns");
+        arrayOfGuns = guns.GetComponentsInChildren<GunAttachee>();
     }
 }
